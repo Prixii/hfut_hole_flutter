@@ -1,6 +1,7 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:hfut_hole_flutter/components/common/activable_button.dart';
 import 'package:hfut_hole_flutter/components/hello/login_form.dart';
+import 'package:hfut_hole_flutter/components/hello/register_form.dart';
 
 class FormNavigator extends StatefulWidget {
   const FormNavigator({super.key});
@@ -11,6 +12,15 @@ class FormNavigator extends StatefulWidget {
 
 class _FormNavigatorState extends State<FormNavigator> {
   List<bool> activationList = [true, false];
+  final loginForm = const LoginForm();
+  late Widget registerForm = const RegisterForm();
+  late Widget currentForm;
+
+  @override
+  void initState() {
+    currentForm = loginForm;
+    super.initState();
+  }
 
   Widget _buildNavigator() {
     return Row(
@@ -42,13 +52,17 @@ class _FormNavigatorState extends State<FormNavigator> {
 
   void _toLogin() {
     setState(() {
+      if (activationList[0]) return;
       activationList = [true, false];
+      currentForm = loginForm;
     });
   }
 
   void _toRegister() {
+    if (activationList[1]) return;
     setState(() {
       activationList = [false, true];
+      currentForm = registerForm;
     });
   }
 
@@ -65,7 +79,7 @@ class _FormNavigatorState extends State<FormNavigator> {
               child: _buildNavigator(),
             ),
             const SizedBox(height: 20),
-            const Expanded(child: LoginForm()),
+            Expanded(child: currentForm),
           ],
         ),
       ),
