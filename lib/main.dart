@@ -1,5 +1,8 @@
 import 'package:fluent_ui/fluent_ui.dart';
+import 'package:logger/logger.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+final logger = Logger(printer: PrettyPrinter());
 
 void main() {
   runApp(const MainApp());
