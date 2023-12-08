@@ -1,0 +1,14 @@
+{
+  "code": 123,
+  "msg": [
+    "12",
+    "23",
+    "34"
+  ],
+  "data": {
+    "id": "id",
+    "level": 123,
+    "experience": 1234,
+    "nextLevelRequiredExperience": 11145
+  }
+}

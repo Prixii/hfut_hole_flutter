@@ -6,4 +6,7 @@ part 'env.g.dart';
 abstract class Env {
   @EnviedField(varName: 'BASE_URL', obfuscate: true)
   static final String baseUrl = _Env.baseUrl;
+
+  @EnviedField(varName: 'PORT', obfuscate: true)
+  static final int port = _Env.port;
 }

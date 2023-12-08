@@ -1,0 +1,43 @@
+import 'package:fluent_ui/fluent_ui.dart';
+
+final lightTheme = FluentThemeData.light().copyWith(
+    scaffoldBackgroundColor: Colors.white,
+    checkboxTheme: CheckboxThemeData(
+      uncheckedDecoration: ButtonState.resolveWith(
+        (states) => BoxDecoration(
+          borderRadius: BorderRadius.zero,
+          border: Border.all(
+            color: states.isDisabled ? Colors.grey : Colors.grey[50],
+          ),
+          color: Colors.grey[10],
+        ),
+      ),
+      checkedDecoration: ButtonState.resolveWith(
+        (states) => BoxDecoration(
+          borderRadius: BorderRadius.zero,
+          border: Border.all(
+            color: states.isDisabled ? Colors.grey : Colors.errorSecondaryColor,
+          ),
+          color: primaryColor,
+        ),
+      ),
+    ));
+
+const fontTitle = TextStyle(
+  fontSize: 24,
+  fontWeight: FontWeight.bold,
+);
+const fontSubTitle = TextStyle(
+  fontSize: 16,
+  fontWeight: FontWeight.w100,
+);
+const fontBody = TextStyle(
+  fontSize: 16,
+  fontWeight: FontWeight.normal,
+);
+const fontFoot = TextStyle(
+  fontSize: 10,
+  fontWeight: FontWeight.normal,
+);
+
+const primaryColor = Color.fromARGB(255, 186, 45, 53);
