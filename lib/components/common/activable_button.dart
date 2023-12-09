@@ -26,15 +26,27 @@ class _ActivableButtonState extends State<ActivableButton> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: widget.onTap,
-      child: Container(
-        color: widget.isActive ? widget.activeColor : widget.inactiveColor,
-        child: Center(
-          child: Text(
-            widget.text,
-            style: fontBody.copyWith(
-              color: widget.isActive ? Colors.white : Colors.black,
-            ),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 100),
+        decoration: BoxDecoration(
+          color: widget.isActive ? widget.activeColor : widget.inactiveColor,
+        ),
+        child: TweenAnimationBuilder(
+          duration: const Duration(milliseconds: 100),
+          tween: ColorTween(
+            begin: widget.isActive ? Colors.black : widget.inactiveColor,
+            end: widget.isActive ? widget.inactiveColor : Colors.black,
           ),
+          builder: (_, textColor, __) {
+            return Center(
+              child: Text(
+                widget.text,
+                style: fontBody.copyWith(
+                  color: textColor,
+                ),
+              ),
+            );
+          },
         ),
       ),
     );

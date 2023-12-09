@@ -1,5 +1,6 @@
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:hfut_hole_flutter/theme/theme.dart';
+import 'package:hfut_hole_flutter/components/hello/bottom_button.dart';
+import 'package:hfut_hole_flutter/riverpod/hello/hello_provider.dart';
 import 'package:hfut_hole_flutter/util/widget_util.dart';
 
 class RegisterForm extends StatefulWidget {
@@ -33,48 +34,14 @@ class _RegisterFormState extends State<RegisterForm> {
     super.dispose();
   }
 
-  Widget _buildBottomButton(String text, Function() onTap) => GestureDetector(
-        onTap: onTap,
-        child: Container(
-          decoration: BoxDecoration(
-            color: Colors.white,
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.1),
-                spreadRadius: 1,
-                blurRadius: 3,
-                offset: const Offset(0, 1),
-              ),
-            ],
-          ),
-          height: 40,
-          child: Center(
-            child: Row(
-              children: [
-                Expanded(
-                  child: Text(
-                    text,
-                    style: fontBody.copyWith(
-                      color: Colors.black,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-                Container(
-                  color: primaryColor,
-                  height: 40,
-                  width: 40,
-                  child: const Icon(
-                    FluentIcons.double_chevron_right12,
-                    color: Colors.white,
-                    size: 20,
-                  ),
-                )
-              ],
-            ),
-          ),
-        ),
-      );
+  Future<void> _doRegister() {
+    return register(
+      nickName: _nickNameController.text,
+      studentId: _studentIdController.text,
+      password: _passwordController.text,
+      infoPortalPassword: _infoPortalPasswordController.text,
+    ).then((value) => null);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -104,9 +71,9 @@ class _RegisterFormState extends State<RegisterForm> {
           ),
           const SizedBox(height: 15),
           Expanded(child: Container()),
-          _buildBottomButton(
-            "注册",
-            () => {},
+          BottomButton(
+            onTap: _doRegister,
+            text: "注册",
           ),
         ],
       ),

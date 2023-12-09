@@ -1,15 +1,20 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hfut_hole_flutter/components/common/activable_button.dart';
+import 'package:hfut_hole_flutter/components/hello/login_form.dart';
+import 'package:hfut_hole_flutter/components/hello/register_form.dart';
 import 'package:hfut_hole_flutter/riverpod/hello/hello_provider.dart';
 
-class FormNavigator extends ConsumerWidget {
+class FormNavigator extends StatelessWidget {
   const FormNavigator({super.key});
+
+  final _loginForm = const LoginForm();
+  final _registerForm = const RegisterForm();
 
   Widget _buildNavigator() {
     return Consumer(
       builder: (builder, ref, child) {
-        final page = ref.watch(helloProvider.select((value) => value.page));
+        final page = ref.watch(helloProvider);
         return Row(
           children: [
             Expanded(
@@ -17,7 +22,6 @@ class FormNavigator extends ConsumerWidget {
                 text: "登录",
                 isActive: page == HelloPage.login,
                 inactiveColor: Colors.grey[10],
-                // TODO
                 onTap: () =>
                     ref.read(helloProvider.notifier).setPage(HelloPage.login),
               ),
@@ -32,7 +36,6 @@ class FormNavigator extends ConsumerWidget {
                 text: "注册",
                 isActive: page == HelloPage.register,
                 inactiveColor: Colors.grey[10],
-                // TODO
                 onTap: () => ref
                     .read(helloProvider.notifier)
                     .setPage(HelloPage.register),
@@ -44,8 +47,24 @@ class FormNavigator extends ConsumerWidget {
     );
   }
 
+  Widget _currentForm() {
+    return Consumer(
+      builder: (builder, ref, child) {
+        final page = ref.watch(helloProvider);
+        switch (page) {
+          case HelloPage.login:
+            return _loginForm;
+          case HelloPage.register:
+            return _registerForm;
+          default:
+            return Container();
+        }
+      },
+    );
+  }
+
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return Container(
       color: Colors.grey[10],
       child: Padding(
@@ -57,8 +76,7 @@ class FormNavigator extends ConsumerWidget {
               child: _buildNavigator(),
             ),
             const SizedBox(height: 20),
-            // TODO
-            Expanded(child: ref.watch(helloProvider).currentPage),
+            Expanded(child: _currentForm()),
           ],
         ),
       ),

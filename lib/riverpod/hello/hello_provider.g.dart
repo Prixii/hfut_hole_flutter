@@ -6,11 +6,11 @@ part of 'hello_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$helloHash() => r'6756d3f2875f9f45ed476acdb51bf8f5957ccdc4';
+String _$helloHash() => r'7f034eee6da101b87d28100022b23e705ad17f7e';
 
 /// See also [Hello].
 @ProviderFor(Hello)
-final helloProvider = AutoDisposeNotifierProvider<Hello, HelloState>.internal(
+final helloProvider = AutoDisposeNotifierProvider<Hello, HelloPage>.internal(
   Hello.new,
   name: r'helloProvider',
   debugGetCreateSourceHash:
@@ -19,6 +19,6 @@ final helloProvider = AutoDisposeNotifierProvider<Hello, HelloState>.internal(
   allTransitiveDependencies: null,
 );
 
-typedef _$Hello = AutoDisposeNotifier<HelloState>;
+typedef _$Hello = AutoDisposeNotifier<HelloPage>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

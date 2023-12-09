@@ -1,5 +1,6 @@
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:hfut_hole_flutter/theme/theme.dart';
+import 'package:hfut_hole_flutter/components/hello/bottom_button.dart';
+import 'package:hfut_hole_flutter/riverpod/hello/hello_provider.dart';
 import 'package:hfut_hole_flutter/util/widget_util.dart';
 
 class LoginForm extends StatefulWidget {
@@ -9,10 +10,19 @@ class LoginForm extends StatefulWidget {
   State<LoginForm> createState() => _LoginFormState();
 }
 
-class _LoginFormState extends State<LoginForm> {
-  late TextEditingController _studentIdController, _passwordController;
-  bool rememberMe = false;
+class _LoginFormState extends State<LoginForm>
+    with SingleTickerProviderStateMixin {
   bool autoLogin = false;
+  bool rememberMe = false;
+
+  late TextEditingController _studentIdController, _passwordController;
+
+  @override
+  void dispose() {
+    _studentIdController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   void initState() {
@@ -20,49 +30,6 @@ class _LoginFormState extends State<LoginForm> {
     _passwordController = TextEditingController();
     super.initState();
   }
-
-  Widget _buildBottomButton(String text, Function() onTap) => GestureDetector(
-        onTap: onTap,
-        child: Container(
-          decoration: BoxDecoration(
-            color: Colors.white,
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.1),
-                spreadRadius: 1,
-                blurRadius: 3,
-                offset: const Offset(0, 1),
-              ),
-            ],
-          ),
-          height: 40,
-          child: Center(
-            child: Row(
-              children: [
-                Expanded(
-                  child: Text(
-                    text,
-                    style: fontBody.copyWith(
-                      color: Colors.black,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-                Container(
-                  color: primaryColor,
-                  height: 40,
-                  width: 40,
-                  child: const Icon(
-                    FluentIcons.double_chevron_right12,
-                    color: Colors.white,
-                    size: 20,
-                  ),
-                )
-              ],
-            ),
-          ),
-        ),
-      );
 
   Widget _buildCheckBoxGroup() {
     return Row(
@@ -90,6 +57,15 @@ class _LoginFormState extends State<LoginForm> {
     );
   }
 
+  Future<void> _doLogin() {
+    return login(
+      studentId: _studentIdController.text,
+      password: _passwordController.text,
+      rememberMe: rememberMe,
+      autoLogin: autoLogin,
+    ).then((value) => null);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -108,9 +84,9 @@ class _LoginFormState extends State<LoginForm> {
           const SizedBox(height: 15),
           _buildCheckBoxGroup(),
           Expanded(child: Container()),
-          _buildBottomButton(
-            "登录",
-            () => {},
+          BottomButton(
+            onTap: _doLogin,
+            text: "登录",
           ),
         ],
       ),
