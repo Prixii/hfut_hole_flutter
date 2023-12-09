@@ -40,4 +40,4 @@ const fontFoot = TextStyle(
   fontWeight: FontWeight.normal,
 );
 
-const primaryColor = Color.fromARGB(255, 186, 45, 53);
+const primaryColor = Color.fromARGB(255, 55, 134, 203);
