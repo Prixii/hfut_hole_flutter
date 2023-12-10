@@ -1,6 +1,6 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hfut_hole_flutter/page/hello/index.dart';
+import 'package:hfut_hole_flutter/router.dart';
 import 'package:hfut_hole_flutter/theme/theme.dart';
 import 'package:logger/logger.dart';
 
@@ -16,13 +16,9 @@ class MainApp extends StatelessWidget {
   const MainApp({super.key});
   @override
   Widget build(BuildContext context) {
-    return FluentApp(
+    return FluentApp.router(
+      routerConfig: router,
       theme: lightTheme,
-      home: const ScaffoldPage(
-        content: Center(
-          child: Hello(),
-        ),
-      ),
     );
   }
 }

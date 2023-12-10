@@ -7,8 +7,12 @@ class Hello extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const TwoColumnedCard(
-      formWidget: FormNavigator(),
+    return const ScaffoldPage(
+      content: Center(
+        child: TwoColumnedCard(
+          formWidget: FormNavigator(),
+        ),
+      ),
     );
   }
 }

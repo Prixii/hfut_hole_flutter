@@ -1,7 +1,6 @@
 import 'package:fluent_ui/fluent_ui.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hfut_hole_flutter/components/hello/bottom_button.dart';
-import 'package:hfut_hole_flutter/main.dart';
-import 'package:hfut_hole_flutter/network/auth.dart';
 import 'package:hfut_hole_flutter/util/widget_util.dart';
 
 class LoginForm extends StatefulWidget {
@@ -59,7 +58,8 @@ class _LoginFormState extends State<LoginForm>
   }
 
   Future<void> _doLogin() {
-    return Future.delayed(const Duration(seconds: 2));
+    return Future.delayed(const Duration(seconds: 2))
+        .then((value) => context.go('/main'));
 
     // authClient
     //     .loginRequest(
