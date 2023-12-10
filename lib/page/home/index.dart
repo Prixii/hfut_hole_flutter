@@ -1,7 +1,7 @@
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:hfut_hole_flutter/components/common/post_card.dart';
+import 'package:hfut_hole_flutter/components/common/hole_masonry_layout.dart';
 import 'package:hfut_hole_flutter/gen/assets.gen.dart';
+import 'package:hfut_hole_flutter/util/widget_util.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -30,7 +30,7 @@ class Home extends StatelessWidget {
     );
   }
 
-  Widget _buildNavigator() {
+  Widget _buildLeftNavigator() {
     return Container(
       width: 60,
       decoration: BoxDecoration(
@@ -74,17 +74,40 @@ class Home extends StatelessWidget {
     );
   }
 
-  Widget _buildMasonryGridView() {
-    return Padding(
-      padding: const EdgeInsets.all(24.0),
-      child: MasonryGridView.count(
-        crossAxisCount: 4,
-        mainAxisSpacing: 28.0,
-        crossAxisSpacing: 24.0,
-        itemCount: 20,
-        shrinkWrap: true,
-        itemBuilder: (context, index) => PostCard(
-          height: 100.0 + 10 * index,
+  Widget _buildRightPart() {
+    return Column(
+      children: [_buildSearchBar(), const Expanded(child: HoleMasonryLayout())],
+    );
+  }
+
+  Widget _buildSearchBar() {
+    return Container(
+      height: 80,
+      color: Colors.grey[80],
+      child: Center(
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(64, 0, 64, 0),
+          child: Container(
+            height: 40,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Row(
+              children: [
+                const SizedBox(width: 20),
+                Expanded(
+                  child: buildMetroTextBox(
+                      controller: TextEditingController(),
+                      placeholder: "搜索",
+                      showBorder: false),
+                ),
+                const SizedBox(width: 16),
+                const Icon(FluentIcons.search),
+                const SizedBox(width: 16),
+              ],
+            ),
+          ),
         ),
       ),
     );
@@ -97,10 +120,8 @@ class Home extends StatelessWidget {
       content: Center(
         child: Row(
           children: [
-            _buildNavigator(),
-            Expanded(
-              child: _buildMasonryGridView(),
-            ),
+            _buildLeftNavigator(),
+            Expanded(child: _buildRightPart()),
           ],
         ),
       ),

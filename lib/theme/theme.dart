@@ -34,6 +34,10 @@ const fontSubTitle = TextStyle(
   fontSize: 16,
   fontWeight: FontWeight.w100,
 );
+const fontSubTitleBold = TextStyle(
+  fontSize: 16,
+  fontWeight: FontWeight.w500,
+);
 const fontBody = TextStyle(
   fontSize: 16,
   fontWeight: FontWeight.normal,

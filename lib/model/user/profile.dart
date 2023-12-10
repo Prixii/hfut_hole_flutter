@@ -7,10 +7,9 @@ part 'profile.g.dart';
 class UserProfile with _$UserProfile {
   const factory UserProfile({
     required int id,
-    required String createAt,
     required String username,
-    required String avatar,
     required Role role,
+    required String avatar,
     required Level level,
   }) = _UserProfile;
 

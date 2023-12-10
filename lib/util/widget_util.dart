@@ -1,11 +1,11 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:hfut_hole_flutter/theme/theme.dart';
 
-Widget buildMetroTextBox({
-  required TextEditingController controller,
-  String? placeholder,
-  bool isPassword = false,
-}) =>
+Widget buildMetroTextBox(
+        {required TextEditingController controller,
+        String? placeholder,
+        bool isPassword = false,
+        bool showBorder = true}) =>
     isPassword
         ? PasswordBox(
             style: fontBody,
@@ -15,6 +15,10 @@ Widget buildMetroTextBox({
             unfocusedColor: Colors.transparent,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(0),
+              border: Border.all(
+                color: showBorder ? Colors.grey[20] : Colors.transparent,
+                width: showBorder ? 1 : 0,
+              ),
             ),
           )
         : TextBox(
@@ -26,6 +30,10 @@ Widget buildMetroTextBox({
             unfocusedColor: Colors.transparent,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(0),
+              border: Border.all(
+                color: showBorder ? Colors.grey[20] : Colors.transparent,
+                width: showBorder ? 1 : 0,
+              ),
             ),
           );
 

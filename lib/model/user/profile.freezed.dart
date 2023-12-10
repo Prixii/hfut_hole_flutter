@@ -21,10 +21,9 @@ UserProfile _$UserProfileFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$UserProfile {
   int get id => throw _privateConstructorUsedError;
-  String get createAt => throw _privateConstructorUsedError;
   String get username => throw _privateConstructorUsedError;
-  String get avatar => throw _privateConstructorUsedError;
   Role get role => throw _privateConstructorUsedError;
+  String get avatar => throw _privateConstructorUsedError;
   Level get level => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -39,13 +38,7 @@ abstract class $UserProfileCopyWith<$Res> {
           UserProfile value, $Res Function(UserProfile) then) =
       _$UserProfileCopyWithImpl<$Res, UserProfile>;
   @useResult
-  $Res call(
-      {int id,
-      String createAt,
-      String username,
-      String avatar,
-      Role role,
-      Level level});
+  $Res call({int id, String username, Role role, String avatar, Level level});
 
   $LevelCopyWith<$Res> get level;
 }
@@ -64,10 +57,9 @@ class _$UserProfileCopyWithImpl<$Res, $Val extends UserProfile>
   @override
   $Res call({
     Object? id = null,
-    Object? createAt = null,
     Object? username = null,
-    Object? avatar = null,
     Object? role = null,
+    Object? avatar = null,
     Object? level = null,
   }) {
     return _then(_value.copyWith(
@@ -75,22 +67,18 @@ class _$UserProfileCopyWithImpl<$Res, $Val extends UserProfile>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      createAt: null == createAt
-          ? _value.createAt
-          : createAt // ignore: cast_nullable_to_non_nullable
-              as String,
       username: null == username
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
-              as String,
-      avatar: null == avatar
-          ? _value.avatar
-          : avatar // ignore: cast_nullable_to_non_nullable
               as String,
       role: null == role
           ? _value.role
           : role // ignore: cast_nullable_to_non_nullable
               as Role,
+      avatar: null == avatar
+          ? _value.avatar
+          : avatar // ignore: cast_nullable_to_non_nullable
+              as String,
       level: null == level
           ? _value.level
           : level // ignore: cast_nullable_to_non_nullable
@@ -115,13 +103,7 @@ abstract class _$$UserProfileImplCopyWith<$Res>
       __$$UserProfileImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {int id,
-      String createAt,
-      String username,
-      String avatar,
-      Role role,
-      Level level});
+  $Res call({int id, String username, Role role, String avatar, Level level});
 
   @override
   $LevelCopyWith<$Res> get level;
@@ -139,10 +121,9 @@ class __$$UserProfileImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? createAt = null,
     Object? username = null,
-    Object? avatar = null,
     Object? role = null,
+    Object? avatar = null,
     Object? level = null,
   }) {
     return _then(_$UserProfileImpl(
@@ -150,22 +131,18 @@ class __$$UserProfileImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      createAt: null == createAt
-          ? _value.createAt
-          : createAt // ignore: cast_nullable_to_non_nullable
-              as String,
       username: null == username
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
-              as String,
-      avatar: null == avatar
-          ? _value.avatar
-          : avatar // ignore: cast_nullable_to_non_nullable
               as String,
       role: null == role
           ? _value.role
           : role // ignore: cast_nullable_to_non_nullable
               as Role,
+      avatar: null == avatar
+          ? _value.avatar
+          : avatar // ignore: cast_nullable_to_non_nullable
+              as String,
       level: null == level
           ? _value.level
           : level // ignore: cast_nullable_to_non_nullable
@@ -179,10 +156,9 @@ class __$$UserProfileImplCopyWithImpl<$Res>
 class _$UserProfileImpl implements _UserProfile {
   const _$UserProfileImpl(
       {required this.id,
-      required this.createAt,
       required this.username,
-      required this.avatar,
       required this.role,
+      required this.avatar,
       required this.level});
 
   factory _$UserProfileImpl.fromJson(Map<String, dynamic> json) =>
@@ -191,19 +167,17 @@ class _$UserProfileImpl implements _UserProfile {
   @override
   final int id;
   @override
-  final String createAt;
-  @override
   final String username;
   @override
-  final String avatar;
-  @override
   final Role role;
+  @override
+  final String avatar;
   @override
   final Level level;
 
   @override
   String toString() {
-    return 'UserProfile(id: $id, createAt: $createAt, username: $username, avatar: $avatar, role: $role, level: $level)';
+    return 'UserProfile(id: $id, username: $username, role: $role, avatar: $avatar, level: $level)';
   }
 
   @override
@@ -212,19 +186,17 @@ class _$UserProfileImpl implements _UserProfile {
         (other.runtimeType == runtimeType &&
             other is _$UserProfileImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.createAt, createAt) ||
-                other.createAt == createAt) &&
             (identical(other.username, username) ||
                 other.username == username) &&
-            (identical(other.avatar, avatar) || other.avatar == avatar) &&
             (identical(other.role, role) || other.role == role) &&
+            (identical(other.avatar, avatar) || other.avatar == avatar) &&
             (identical(other.level, level) || other.level == level));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, id, createAt, username, avatar, role, level);
+      Object.hash(runtimeType, id, username, role, avatar, level);
 
   @JsonKey(ignore: true)
   @override
@@ -243,10 +215,9 @@ class _$UserProfileImpl implements _UserProfile {
 abstract class _UserProfile implements UserProfile {
   const factory _UserProfile(
       {required final int id,
-      required final String createAt,
       required final String username,
-      required final String avatar,
       required final Role role,
+      required final String avatar,
       required final Level level}) = _$UserProfileImpl;
 
   factory _UserProfile.fromJson(Map<String, dynamic> json) =
@@ -255,13 +226,11 @@ abstract class _UserProfile implements UserProfile {
   @override
   int get id;
   @override
-  String get createAt;
-  @override
   String get username;
   @override
-  String get avatar;
-  @override
   Role get role;
+  @override
+  String get avatar;
   @override
   Level get level;
   @override

@@ -9,10 +9,9 @@ part of 'profile.dart';
 _$UserProfileImpl _$$UserProfileImplFromJson(Map<String, dynamic> json) =>
     _$UserProfileImpl(
       id: json['id'] as int,
-      createAt: json['createAt'] as String,
       username: json['username'] as String,
-      avatar: json['avatar'] as String,
       role: $enumDecode(_$RoleEnumMap, json['role']),
+      avatar: json['avatar'] as String,
       level: Level.fromJson((json['level'] as Map<String, dynamic>).map(
         (k, e) => MapEntry(k, e as Object),
       )),
@@ -21,10 +20,9 @@ _$UserProfileImpl _$$UserProfileImplFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$UserProfileImplToJson(_$UserProfileImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'createAt': instance.createAt,
       'username': instance.username,
-      'avatar': instance.avatar,
       'role': _$RoleEnumMap[instance.role]!,
+      'avatar': instance.avatar,
       'level': instance.level,
     };
 
