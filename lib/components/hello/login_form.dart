@@ -1,6 +1,7 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:hfut_hole_flutter/components/hello/bottom_button.dart';
-import 'package:hfut_hole_flutter/riverpod/hello/hello_provider.dart';
+import 'package:hfut_hole_flutter/main.dart';
+import 'package:hfut_hole_flutter/network/auth.dart';
 import 'package:hfut_hole_flutter/util/widget_util.dart';
 
 class LoginForm extends StatefulWidget {
@@ -58,12 +59,20 @@ class _LoginFormState extends State<LoginForm>
   }
 
   Future<void> _doLogin() {
-    return login(
-      studentId: _studentIdController.text,
-      password: _passwordController.text,
-      rememberMe: rememberMe,
-      autoLogin: autoLogin,
-    ).then((value) => null);
+    return Future.delayed(const Duration(seconds: 2));
+
+    // authClient
+    //     .loginRequest(
+    //   studentId: int.parse(_studentIdController.text),
+    //   password: _passwordController.text,
+    //   rememberMe: rememberMe,
+    //   autoLogin: autoLogin,
+    // )
+    //     .then(
+    //   (value) {
+    //     logger.i(value);
+    //   },
+    // );
   }
 
   @override

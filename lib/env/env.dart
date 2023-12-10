@@ -9,4 +9,10 @@ abstract class Env {
 
   @EnviedField(varName: 'PORT', obfuscate: true)
   static final int port = _Env.port;
+
+  @EnviedField(varName: 'STUDENT_ID', obfuscate: true)
+  static final int studentId = _Env.studentId;
+
+  @EnviedField(varName: 'PASSWORD', obfuscate: true)
+  static final String password = _Env.password;
 }

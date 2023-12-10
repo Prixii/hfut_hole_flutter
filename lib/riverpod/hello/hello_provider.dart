@@ -14,15 +14,6 @@ class Hello extends _$Hello {
   }
 }
 
-Future<void> login({
-  required String studentId,
-  required String password,
-  required bool rememberMe,
-  required bool autoLogin,
-}) async {
-  await Future.delayed(const Duration(seconds: 2));
-}
-
 Future<void> register({
   required String nickName,
   required String studentId,
