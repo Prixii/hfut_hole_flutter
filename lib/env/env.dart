@@ -15,4 +15,7 @@ abstract class Env {
 
   @EnviedField(varName: 'PASSWORD', obfuscate: true)
   static final String password = _Env.password;
+
+  @EnviedField(varName: 'TOKEN', obfuscate: true)
+  static final String token = _Env.token;
 }

@@ -16,12 +16,15 @@ final lightTheme = FluentThemeData.light().copyWith(
         (states) => BoxDecoration(
           borderRadius: BorderRadius.zero,
           border: Border.all(
-            color: states.isDisabled ? Colors.grey : Colors.errorSecondaryColor,
+            color:
+                states.isDisabled ? Colors.grey : primaryColor.withOpacity(0.7),
           ),
           color: primaryColor,
         ),
       ),
     ));
+
+final darkTheme = FluentThemeData.dark();
 
 const fontTitle = TextStyle(
   fontSize: 24,

@@ -58,8 +58,9 @@ class _LoginFormState extends State<LoginForm>
   }
 
   Future<void> _doLogin() {
-    return Future.delayed(const Duration(seconds: 2))
-        .then((value) => context.go('/main'));
+    return Future.delayed(const Duration(seconds: 2)).then((value) {
+      context.go('/home');
+    });
 
     // authClient
     //     .loginRequest(
