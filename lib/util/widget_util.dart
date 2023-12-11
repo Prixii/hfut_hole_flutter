@@ -5,6 +5,7 @@ Widget buildMetroTextBox(
         {required TextEditingController controller,
         String? placeholder,
         bool isPassword = false,
+        int maxLines = 1,
         bool showBorder = true}) =>
     isPassword
         ? PasswordBox(
@@ -28,6 +29,8 @@ Widget buildMetroTextBox(
             controller: controller,
             highlightColor: Colors.transparent,
             unfocusedColor: Colors.transparent,
+            maxLines: maxLines,
+            minLines: 1,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(0),
               border: Border.all(

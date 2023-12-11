@@ -1,5 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hfut_hole_flutter/components/common/user_avatar.dart';
 import 'package:hfut_hole_flutter/riverpod/global/page_state_provider.dart';
 import 'package:hfut_hole_flutter/theme/theme.dart';
 
@@ -76,8 +78,7 @@ class HoleDetail extends ConsumerWidget {
         padding: const EdgeInsets.only(top: 8.0),
         child: Row(
           children: [
-            ClipOval(
-                child: Image.network(hole.user.avatar, width: 30, height: 30)),
+            UserAvatar(url: hole.user.avatar),
             const SizedBox(width: 10),
             Expanded(
               child: Text(
