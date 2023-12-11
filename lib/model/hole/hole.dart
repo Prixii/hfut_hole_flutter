@@ -36,6 +36,27 @@ class Hole with _$Hole {
   }) = _Hole;
 
   factory Hole.fromJson(Map<String, dynamic> json) => _$HoleFromJson(json);
+  factory Hole.empty() => const Hole(
+      id: 0,
+      createAt: '',
+      body: '',
+      title: '',
+      imgs: [],
+      bilibili: '',
+      user: UserData(
+        username: '',
+        id: 0,
+        avatar: '',
+      ),
+      favoriteCounts: 0,
+      favoriteUsers: [],
+      tags: [],
+      vote: null,
+      commentCounts: 0,
+      comments: [],
+      category: Category(category: ''),
+      classification: Classification(name: ''),
+      subClassification: SubClassification(name: ''));
 }
 
 @freezed

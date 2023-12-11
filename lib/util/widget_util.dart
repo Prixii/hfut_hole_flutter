@@ -54,16 +54,19 @@ Widget buildFormItem({
 
 Widget buildCheckBox(bool checked,
         {required String label, required Function(bool) onChanged}) =>
-    Row(
-      children: [
-        Checkbox(
-          checked: checked,
-          onChanged: (v) => onChanged(v ?? false),
-          style: CheckboxThemeData(),
-        ),
-        const SizedBox(
-          width: 10,
-        ),
-        Text(label),
-      ],
+    GestureDetector(
+      onTap: () => onChanged(!checked),
+      child: Row(
+        children: [
+          Checkbox(
+            checked: checked,
+            onChanged: (v) => onChanged(v ?? false),
+            style: const CheckboxThemeData(),
+          ),
+          const SizedBox(
+            width: 10,
+          ),
+          Text(label),
+        ],
+      ),
     );

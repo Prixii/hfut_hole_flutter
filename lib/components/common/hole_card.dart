@@ -1,8 +1,10 @@
 import 'package:fluent_ui/fluent_ui.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hfut_hole_flutter/model/hole/hole.dart';
+import 'package:hfut_hole_flutter/riverpod/global/page_state_provider.dart';
 import 'package:hfut_hole_flutter/theme/theme.dart';
 
-class HoleCard extends StatelessWidget {
+class HoleCard extends ConsumerWidget {
   const HoleCard({super.key, required this.hole});
 
   final Hole hole;
@@ -89,6 +91,7 @@ class HoleCard extends StatelessWidget {
         children: [
           ClipOval(
               child: Image.network(hole.user.avatar, width: 30, height: 30)),
+          const SizedBox(width: 10),
           Expanded(
             child: Text(
               hole.user.username,
@@ -146,38 +149,43 @@ class HoleCard extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Stack(
-        alignment: Alignment.bottomCenter,
-        children: [
-          Container(
-            decoration: BoxDecoration(
-              color: Colors.grey[40],
-              borderRadius: const BorderRadius.all(Radius.circular(8)),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.1),
-                  spreadRadius: 0,
-                  blurRadius: 5,
-                  offset: const Offset(0, 0),
-                ),
-              ],
-            ),
-            child: hole.imgs.isEmpty
-                ? Container()
-                : ClipRRect(
-                    borderRadius: const BorderRadius.all(Radius.circular(8)),
-                    child: Image.network(
-                      hole.imgs[0],
-                      width: double.infinity,
-                      fit: BoxFit.fitWidth,
-                    ),
+      child: GestureDetector(
+        onTap: () {
+          ref.read(pageStateProvider.notifier).openHole(hole);
+        },
+        child: Stack(
+          alignment: Alignment.bottomCenter,
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.grey[40],
+                borderRadius: const BorderRadius.all(Radius.circular(8)),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.1),
+                    spreadRadius: 0,
+                    blurRadius: 5,
+                    offset: const Offset(0, 0),
                   ),
-          ),
-          hole.title != null ? _buildInfoWithTitle() : _buildInfoWithBody(),
-        ],
+                ],
+              ),
+              child: hole.imgs.isEmpty
+                  ? Container()
+                  : ClipRRect(
+                      borderRadius: const BorderRadius.all(Radius.circular(8)),
+                      child: Image.network(
+                        hole.imgs[0],
+                        width: double.infinity,
+                        fit: BoxFit.fitWidth,
+                      ),
+                    ),
+            ),
+            hole.title != null ? _buildInfoWithTitle() : _buildInfoWithBody(),
+          ],
+        ),
       ),
     );
   }
