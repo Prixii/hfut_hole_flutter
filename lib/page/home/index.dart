@@ -5,6 +5,7 @@ import 'package:hfut_hole_flutter/components/common/title_bar.dart';
 import 'package:hfut_hole_flutter/gen/assets.gen.dart';
 import 'package:hfut_hole_flutter/page/hole_detail/index.dart';
 import 'package:hfut_hole_flutter/riverpod/global/page_state_provider.dart';
+import 'package:hfut_hole_flutter/theme/theme.dart';
 import 'package:hfut_hole_flutter/util/widget_util.dart';
 import 'package:unicons/unicons.dart';
 
@@ -63,6 +64,7 @@ class Home extends StatelessWidget {
               const NavigatorItem(
                   child: Icon(
                 UniconsLine.estate,
+                fill: 1.0,
                 size: iconSize,
               )),
               const NavigatorItem(
@@ -146,7 +148,7 @@ class Home extends StatelessWidget {
               Tween<Offset>(begin: const Offset(1, 0), end: Offset.zero)),
           child: child,
         ),
-        child: ref.watch(pageStateProvider).showDetail
+        child: ref.watch(pageStateProvider).appState.showHole
             ? const HoleDetailPage()
             : _buildRightPart(),
       );
@@ -197,7 +199,22 @@ class _NavigatorItemState extends State<NavigatorItem> {
       height: 60,
       child: Padding(
         padding: const EdgeInsets.fromLTRB(4, 0, 4, 4),
-        child: widget.child,
+        child: Column(
+          children: [
+            Expanded(child: widget.child),
+            Container(
+              height: 4,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(2),
+                color: primaryColor,
+              ),
+              width: 36,
+            ),
+            Container(
+              height: 12,
+            ),
+          ],
+        ),
       ),
     );
   }

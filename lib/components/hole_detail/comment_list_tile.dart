@@ -1,6 +1,7 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:hfut_hole_flutter/components/common/user_avatar.dart';
 import 'package:hfut_hole_flutter/model/hole/hole.dart';
+import 'package:unicons/unicons.dart';
 
 class CommentListTile extends StatefulWidget {
   const CommentListTile({
@@ -49,7 +50,7 @@ class _CommentListTileState extends State<CommentListTile> {
         const SizedBox(width: 12),
         _buildFavoriteIcon(),
         const SizedBox(width: 12),
-        const Icon(FluentIcons.more_vertical)
+        const Icon(UniconsSolid.ellipsis_v)
       ],
     );
   }
@@ -66,7 +67,7 @@ class _CommentListTileState extends State<CommentListTile> {
     return Row(
       children: [
         const Icon(
-          FluentIcons.heart,
+          UniconsLine.heart,
           size: 14,
         ),
         const SizedBox(width: 5),

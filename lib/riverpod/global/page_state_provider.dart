@@ -10,30 +10,70 @@ part 'page_state_provider.g.dart';
 class PageState extends _$PageState {
   @override
   PageStateData build() {
-    return PageStateData(hole: Hole.empty());
+    return PageStateData.init();
   }
 
   void openHole(Hole hole) {
-    state = state.copyWith(hole: hole, showDetail: true);
+    var newHoleState = state.holeState.copyWith(
+      hole: hole,
+    );
+    var newAppState = state.appState.copyWith(
+      showHole: true,
+    );
+
+    state = state.copyWith(
+      holeState: newHoleState,
+      appState: newAppState,
+    );
   }
 
   void closeHole() {
-    state = state.copyWith(showDetail: false);
+    var newAppState = state.appState.copyWith(
+      showHole: false,
+    );
+    state = state.copyWith(appState: newAppState);
   }
 }
 
 @freezed
 class PageStateData with _$PageStateData {
   const factory PageStateData({
+    required HoleStateData holeState,
+    required AppStateData appState,
+  }) = _PageStateData;
+
+  factory PageStateData.init() => PageStateData(
+        holeState: HoleStateData.init(),
+        appState: AppStateData.init(),
+      );
+}
+
+@freezed
+class HoleStateData with _$HoleStateData {
+  const factory HoleStateData({
     required Hole hole,
     @Default(null) HoleClassification? classification,
     @Default(HoleListMode.hot) HoleListMode listMode,
-    @Default(false) bool showDetail,
     @Default(HoleDetailCommentMode.all) HoleDetailCommentMode commentMode,
     @Default(HoleDetailCommentOrder.favorite)
     HoleDetailCommentOrder commentOrder,
     @Default(0) int commentPage,
     @Default(0) int commentTotal,
     @Default(0) int commentPageSize,
-  }) = _PageStateData;
+  }) = _HoleStateData;
+
+  factory HoleStateData.init() => HoleStateData(hole: Hole.empty());
+}
+
+@freezed
+class AppStateData with _$AppStateData {
+  const factory AppStateData({
+    required Pages page,
+    required bool showHole,
+  }) = _AppStateData;
+
+  factory AppStateData.init() => AppStateData(
+        page: Pages.home,
+        showHole: false,
+      );
 }

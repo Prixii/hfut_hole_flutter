@@ -42,3 +42,10 @@ enum HoleClassification {
   game,
   clubActivities,
 }
+
+enum Pages {
+  user,
+  home,
+  space,
+  message,
+}

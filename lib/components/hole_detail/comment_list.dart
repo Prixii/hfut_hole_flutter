@@ -23,7 +23,7 @@ class _CommentListState extends ConsumerState<CommentList> {
 
   @override
   Widget build(BuildContext context) {
-    var comments = ref.watch(pageStateProvider).hole.comments;
+    var comments = ref.watch(pageStateProvider).holeState.hole.comments;
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Container(

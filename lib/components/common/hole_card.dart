@@ -4,6 +4,7 @@ import 'package:hfut_hole_flutter/components/common/user_avatar.dart';
 import 'package:hfut_hole_flutter/model/hole/hole.dart';
 import 'package:hfut_hole_flutter/riverpod/global/page_state_provider.dart';
 import 'package:hfut_hole_flutter/theme/theme.dart';
+import 'package:unicons/unicons.dart';
 
 class HoleCard extends ConsumerWidget {
   const HoleCard({super.key, required this.hole});
@@ -111,7 +112,7 @@ class HoleCard extends ConsumerWidget {
         const SizedBox(width: 12),
         _buildFavoriteIcon(),
         const SizedBox(width: 5),
-        const Icon(FluentIcons.more_vertical)
+        const Icon(UniconsSolid.ellipsis_v),
       ],
     );
   }
@@ -119,7 +120,7 @@ class HoleCard extends ConsumerWidget {
   Widget _buildCommentIcon() {
     return Row(
       children: [
-        const Icon(FluentIcons.comment),
+        const Icon(UniconsLine.comment_alt),
         const SizedBox(width: 5),
         Text(hole.commentCounts > 99 ? "99+" : hole.commentCounts.toString()),
       ],
@@ -129,7 +130,7 @@ class HoleCard extends ConsumerWidget {
   Widget _buildFavoriteIcon() {
     return Row(
       children: [
-        const Icon(FluentIcons.heart),
+        const Icon(UniconsLine.heart),
         const SizedBox(width: 5),
         Text(hole.favoriteCounts > 99 ? "99+" : hole.favoriteCounts.toString()),
       ],
