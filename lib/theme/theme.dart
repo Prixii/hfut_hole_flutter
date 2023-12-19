@@ -48,3 +48,4 @@ const fontFoot = TextStyle(
 );
 
 const primaryColor = Color.fromARGB(255, 55, 134, 203);
+const primaryColorDarker = Color.fromARGB(255, 43, 108, 165);

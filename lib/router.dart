@@ -3,6 +3,8 @@ import 'package:go_router/go_router.dart';
 import 'package:hfut_hole_flutter/page/hello/index.dart';
 import 'package:hfut_hole_flutter/page/home/index.dart';
 
+// TODO Auto Router
+
 final GoRouter router = GoRouter(
   routes: [
     GoRoute(

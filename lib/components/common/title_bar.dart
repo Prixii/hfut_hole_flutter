@@ -1,4 +1,6 @@
 import 'package:fluent_ui/fluent_ui.dart';
+import 'package:hfut_hole_flutter/theme/theme.dart';
+import 'package:unicons/unicons.dart';
 import 'package:window_manager/window_manager.dart';
 
 const titleBarHeight = 32.0;
@@ -27,17 +29,7 @@ class TitleBarState extends State<TitleBar> with WindowListener {
   Widget build(BuildContext context) {
     return DragToMoveArea(
       child: Container(
-          decoration: BoxDecoration(
-            color: Colors.white,
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.2),
-                spreadRadius: 1,
-                blurRadius: 3,
-                offset: const Offset(0, 1),
-              ),
-            ],
-          ),
+          color: primaryColor,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
@@ -46,11 +38,14 @@ class TitleBarState extends State<TitleBar> with WindowListener {
                 child: Row(
                   children: [
                     HoverableButton(
-                        onPressed: () => windowManager.minimize(),
-                        iconData: FluentIcons.error),
+                      iconData: UniconsLine.minus,
+                      onPressed: () => windowManager.minimize(),
+                    ),
                     HoverableButton(
-                        onPressed: () => windowManager.close(),
-                        iconData: FluentIcons.minimum_value),
+                      onPressed: () => windowManager.close(),
+                      iconData: UniconsLine.multiply,
+                      activeColor: Colors.errorPrimaryColor,
+                    ),
                   ],
                 ),
               ),
@@ -61,12 +56,13 @@ class TitleBarState extends State<TitleBar> with WindowListener {
 }
 
 class HoverableButton extends StatefulWidget {
-  const HoverableButton(
-      {super.key,
-      required this.onPressed,
-      required this.iconData,
-      this.activeColor = Colors.grey,
-      this.inactiveColor = Colors.white});
+  const HoverableButton({
+    super.key,
+    required this.onPressed,
+    required this.iconData,
+    this.activeColor = primaryColorDarker,
+    this.inactiveColor = primaryColor,
+  });
   final Function() onPressed;
   final IconData iconData;
   final Color activeColor;
@@ -92,7 +88,10 @@ class HoverableButtonState extends State<HoverableButton> {
           decoration: BoxDecoration(
             color: isHovered ? widget.activeColor : widget.inactiveColor,
           ),
-          child: Icon(widget.iconData),
+          child: Icon(
+            widget.iconData,
+            color: Colors.white,
+          ),
         ),
       ),
     );

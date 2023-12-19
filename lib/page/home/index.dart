@@ -6,6 +6,7 @@ import 'package:hfut_hole_flutter/gen/assets.gen.dart';
 import 'package:hfut_hole_flutter/page/hole_detail/index.dart';
 import 'package:hfut_hole_flutter/riverpod/global/page_state_provider.dart';
 import 'package:hfut_hole_flutter/util/widget_util.dart';
+import 'package:unicons/unicons.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -35,36 +36,55 @@ class Home extends StatelessWidget {
   }
 
   Widget _buildLeftNavigator() {
-    return Container(
-      width: 60,
-      color: Colors.blue.light,
-      child: Column(
-        children: [
-          _buildAvatar(),
-          const Divider(),
-          _buildNavigatorItem(const Icon(
-            FluentIcons.home,
-            size: 28,
-          )),
-          _buildNavigatorItem(const Icon(
-            FluentIcons.info,
-            size: 28,
-          )),
-          _buildNavigatorItem(const Icon(
-            FluentIcons.spacer,
-            size: 28,
-          )),
-          Expanded(child: Container()),
-        ],
-      ),
-    );
-  }
+    const iconSize = 32.0;
 
-  Widget _buildNavigatorItem(Widget child) {
     return SizedBox(
-      height: 52,
-      child:
-          Padding(padding: const EdgeInsets.fromLTRB(4, 0, 4, 4), child: child),
+      width: 80,
+      child: Padding(
+        padding: const EdgeInsets.only(left: 16),
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(16),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.2),
+                spreadRadius: 0,
+                blurRadius: 2,
+                offset: const Offset(0, 1),
+              ),
+            ],
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              _buildAvatar(),
+              const Divider(),
+              const NavigatorItem(
+                  child: Icon(
+                UniconsLine.estate,
+                size: iconSize,
+              )),
+              const NavigatorItem(
+                  child: Icon(
+                UniconsLine.golf_ball,
+                size: iconSize,
+              )),
+              const NavigatorItem(
+                  child: Icon(
+                UniconsLine.comment_alt_exclamation,
+                size: iconSize,
+              )),
+              const Divider(),
+              const NavigatorItem(
+                  child: Icon(
+                UniconsLine.plus_circle,
+                size: iconSize,
+              )),
+            ],
+          ),
+        ),
+      ),
     );
   }
 
@@ -86,9 +106,9 @@ class Home extends StatelessWidget {
               color: Colors.white,
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.2),
+                  color: Colors.black.withOpacity(0.1),
                   spreadRadius: 1,
-                  blurRadius: 8,
+                  blurRadius: 4,
                   offset: const Offset(0, 1),
                 ),
               ],
@@ -104,7 +124,7 @@ class Home extends StatelessWidget {
                       showBorder: false),
                 ),
                 const SizedBox(width: 16),
-                const Icon(FluentIcons.search),
+                const Icon(UniconsLine.search, size: 22),
                 const SizedBox(width: 16),
               ],
             ),
@@ -155,5 +175,30 @@ class Home extends StatelessWidget {
             ],
           ),
         ));
+  }
+}
+
+class NavigatorItem extends StatefulWidget {
+  const NavigatorItem({
+    super.key,
+    required this.child,
+  });
+
+  final Widget child;
+
+  @override
+  State<NavigatorItem> createState() => _NavigatorItemState();
+}
+
+class _NavigatorItemState extends State<NavigatorItem> {
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 60,
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(4, 0, 4, 4),
+        child: widget.child,
+      ),
+    );
   }
 }

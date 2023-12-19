@@ -7,17 +7,14 @@ class HoleDetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScaffoldPage(
+    return const ScaffoldPage(
       padding: EdgeInsets.zero,
       content: Row(
         children: [
-          const Expanded(flex: 2, child: HoleDetail()),
+          Expanded(flex: 3, child: HoleDetail()),
           Expanded(
-            flex: 1,
-            child: Container(
-              color: Colors.grey[50],
-              child: const CommentList(),
-            ),
+            flex: 2,
+            child: CommentList(),
           )
         ],
       ),

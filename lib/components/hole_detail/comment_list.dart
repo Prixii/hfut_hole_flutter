@@ -24,17 +24,35 @@ class _CommentListState extends ConsumerState<CommentList> {
   @override
   Widget build(BuildContext context) {
     var comments = ref.watch(pageStateProvider).hole.comments;
-    return Column(
-      children: [
-        const CommentFilter(),
-        Expanded(
-            child: ListView.builder(
-                itemBuilder: (context, index) => CommentListTile(
-                      comment: comments[index],
-                    ),
-                itemCount: comments.length)),
-        _buildCommentBox(),
-      ],
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Container(
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: const BorderRadius.all(Radius.circular(16)),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.1),
+              spreadRadius: 1,
+              blurRadius: 3,
+              offset: const Offset(0, 1),
+            ),
+          ],
+        ),
+        child: Column(
+          children: [
+            const CommentFilter(),
+            Expanded(
+              child: ListView.builder(
+                  itemBuilder: (context, index) =>
+                      CommentListTile(comment: comments[index]),
+                  itemCount: comments.length),
+            ),
+            _buildCommentBox(),
+          ],
+        ),
+      ),
     );
   }
 }

@@ -10,9 +10,8 @@ class CommentFilter extends StatefulWidget {
 class _CommentFilterState extends State<CommentFilter> {
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 40,
-      color: Colors.grey[80],
       child: Row(
         children: [
           Expanded(
