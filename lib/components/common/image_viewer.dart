@@ -3,7 +3,7 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hfut_hole_flutter/components/common/hoverable_icon.dart';
 import 'package:hfut_hole_flutter/riverpod/global/page_state_provider.dart';
-import 'package:hfut_hole_flutter/theme/theme.dart';
+import 'package:hfut_hole_flutter/util/network_util.dart';
 import 'package:unicons/unicons.dart';
 
 class ImageViewer extends ConsumerStatefulWidget {
@@ -14,12 +14,17 @@ class ImageViewer extends ConsumerStatefulWidget {
 }
 
 class _ImageViewerState extends ConsumerState<ImageViewer> {
+  late List<String> imgUrlList =
+      ref.watch(pageStateProvider).holeState.hole.imgs;
+
   bool showImageSwitcher = false;
   late int index;
+  late int quarterTurns;
 
   @override
   void initState() {
     index = widget.index;
+    quarterTurns = 0;
 
     super.initState();
   }
@@ -35,38 +40,83 @@ class _ImageViewerState extends ConsumerState<ImageViewer> {
         padding: const EdgeInsets.all(8.0),
         child: Column(children: [
           Expanded(
-              child: InteractiveViewer(
-                  child: CachedNetworkImage(
-                      imageUrl: ref
-                          .watch(pageStateProvider)
-                          .holeState
-                          .hole
-                          .imgs[index]))),
-          SizedBox(
-            height: 50,
-            child: Container(
-              color: primaryColor,
+            child: InteractiveViewer(
+              maxScale: 5,
+              child: RotatedBox(
+                quarterTurns: quarterTurns,
+                child: CachedNetworkImage(
+                    width: double.infinity, imageUrl: imgUrlList[index]),
+              ),
             ),
           ),
+          _buildToolBar(),
         ]),
+      ),
+    );
+  }
+
+  Widget _buildToolBar() {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        height: 56,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(16),
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.1),
+              spreadRadius: 0,
+              blurRadius: 8,
+              offset: const Offset(0, 0),
+            ),
+          ],
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            HoverableIcon(
+              iconData: UniconsLine.crop_alt_rotate_left,
+              iconSize: 36,
+              size: 48,
+              borderRadius: 8,
+              onTap: () =>
+                  {setState(() => quarterTurns = (quarterTurns - 1) % 4)},
+            ),
+            const SizedBox(width: 8),
+            HoverableIcon(
+              iconData: UniconsLine.download_alt,
+              iconSize: 36,
+              size: 48,
+              borderRadius: 8,
+              onTap: () => imgUrlList[index].downloadPicture(),
+            ),
+          ],
+        ),
       ),
     );
   }
 
   Widget _buildSwitchButton() {
     return Row(children: [
-      HoverableIcon(
-        iconData: UniconsLine.arrow_circle_left,
-        iconColor: Colors.grey[50],
-        iconSize: 40,
-        onTap: previousImage,
+      Padding(
+        padding: const EdgeInsets.only(left: 16),
+        child: HoverableIcon(
+          iconData: UniconsLine.arrow_circle_left,
+          iconColor: Colors.grey[50],
+          iconSize: 40,
+          onTap: previousImage,
+        ),
       ),
       Expanded(child: Container()),
-      HoverableIcon(
-        iconData: UniconsLine.arrow_circle_right,
-        iconColor: Colors.grey[50],
-        iconSize: 40,
-        onTap: nextImage,
+      Padding(
+        padding: const EdgeInsets.only(right: 16),
+        child: HoverableIcon(
+          iconData: UniconsLine.arrow_circle_right,
+          iconColor: Colors.grey[50],
+          iconSize: 40,
+          onTap: nextImage,
+        ),
       ),
     ]);
   }

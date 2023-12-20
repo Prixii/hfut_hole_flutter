@@ -10,12 +10,14 @@ class HoverableIcon extends StatelessWidget {
     Color? inactiveColor,
     double? size,
     double? iconSize,
+    double? borderRadius,
     required this.onTap,
   })  : iconColor = iconColor ?? Colors.black,
         activeColor = activeColor ?? Colors.grey,
         inactiveColor = inactiveColor ?? Colors.transparent,
         size = size ?? 30,
-        iconSize = iconSize ?? 20;
+        iconSize = iconSize ?? 20,
+        borderRadius = borderRadius ?? 15;
 
   final IconData iconData;
   final Color iconColor;
@@ -23,6 +25,7 @@ class HoverableIcon extends StatelessWidget {
   final Color inactiveColor;
   final double size;
   final double iconSize;
+  final double borderRadius;
   final void Function() onTap;
 
   @override
@@ -30,13 +33,13 @@ class HoverableIcon extends StatelessWidget {
     return Hoverable(
       activeColor: activeColor,
       inactiveColor: inactiveColor,
-      borderRadius: 15,
+      borderRadius: borderRadius,
+      onTap: onTap,
       child: Icon(
         iconData,
         color: iconColor,
         size: iconSize,
       ),
-      onTap: onTap,
     );
   }
 }
