@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hfut_hole_flutter/components/common/user_avatar.dart';
+import 'package:hfut_hole_flutter/components/hole_detail/top_bar.dart';
 import 'package:hfut_hole_flutter/riverpod/global/page_state_provider.dart';
 import 'package:hfut_hole_flutter/theme/theme.dart';
 import 'package:unicons/unicons.dart';
@@ -54,7 +55,8 @@ class HoleDetail extends ConsumerWidget {
         return GridView.builder(
           shrinkWrap: true,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3),
+            crossAxisCount: 3,
+          ),
           itemCount: hole.imgs.length,
           itemBuilder: (context, index) =>
               CachedNetworkImage(imageUrl: hole.imgs[index]),
@@ -108,7 +110,7 @@ class HoleDetail extends ConsumerWidget {
     }
 
     return Padding(
-      padding: const EdgeInsets.fromLTRB(32, 16, 32, 0),
+      padding: const EdgeInsets.fromLTRB(32, 16, 0, 0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -131,54 +133,6 @@ class HoleDetail extends ConsumerWidget {
           buildUserInfoAndIcon(),
           const SizedBox(height: 16),
         ],
-      ),
-    );
-  }
-}
-
-class TopBar extends ConsumerStatefulWidget {
-  const TopBar({
-    super.key,
-  });
-
-  @override
-  ConsumerState<TopBar> createState() => _TopBarState();
-}
-
-class _TopBarState extends ConsumerState<TopBar> {
-  final Color inactiveColor = Colors.transparent;
-  final Color activeColor = Colors.grey[20];
-  var isHovered = false;
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 48,
-      child: MouseRegion(
-        onEnter: (event) => setState(() {
-          isHovered = true;
-        }),
-        onExit: (event) => setState(() {
-          isHovered = false;
-        }),
-        child: GestureDetector(
-          child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12),
-              color: isHovered ? activeColor : inactiveColor,
-            ),
-            width: 64,
-            child: Row(
-              children: [
-                Icon(
-                  UniconsLine.arrow_left,
-                  color: Colors.grey[100],
-                  size: 36,
-                ),
-              ],
-            ),
-          ),
-          onTap: () => ref.read(pageStateProvider.notifier).closeHole(),
-        ),
       ),
     );
   }

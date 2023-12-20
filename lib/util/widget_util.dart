@@ -1,14 +1,18 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:hfut_hole_flutter/theme/theme.dart';
 
-Widget buildMetroTextBox(
-        {required TextEditingController controller,
-        String? placeholder,
-        bool isPassword = false,
-        int maxLines = 1,
-        bool showBorder = true}) =>
+Widget buildMetroTextBox({
+  required TextEditingController controller,
+  String? placeholder,
+  bool isPassword = false,
+  int maxLines = 1,
+  bool showBorder = true,
+  FocusNode? focusNode,
+  Function(String)? onChanged,
+}) =>
     isPassword
         ? PasswordBox(
+            focusNode: focusNode,
             style: fontBody,
             placeholder: placeholder,
             controller: controller,
@@ -23,6 +27,7 @@ Widget buildMetroTextBox(
             ),
           )
         : TextBox(
+            focusNode: focusNode,
             style: fontBody,
             textAlign: TextAlign.left,
             placeholder: placeholder,
@@ -38,6 +43,7 @@ Widget buildMetroTextBox(
                 width: showBorder ? 1 : 0,
               ),
             ),
+            onChanged: onChanged,
           );
 
 Widget buildFormItem({
