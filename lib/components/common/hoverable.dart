@@ -7,6 +7,7 @@ class Hoverable extends StatefulWidget {
     Color? activeColor,
     Color? inactiveColor,
     double? borderRadius,
+    required this.onTap,
   })  : activeColor = activeColor ?? Colors.grey,
         inactiveColor = inactiveColor ?? Colors.transparent,
         borderRadius = borderRadius ?? 0;
@@ -14,6 +15,7 @@ class Hoverable extends StatefulWidget {
   final Color inactiveColor;
   final Widget child;
   final double borderRadius;
+  final void Function() onTap;
   @override
   State<Hoverable> createState() => _HoverableState();
 }
@@ -38,12 +40,15 @@ class _HoverableState extends State<Hoverable> {
           background = widget.inactiveColor;
         })
       },
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(widget.borderRadius),
-          color: background,
+      child: GestureDetector(
+        onTap: widget.onTap,
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(widget.borderRadius),
+            color: background,
+          ),
+          child: widget.child,
         ),
-        child: widget.child,
       ),
     );
   }

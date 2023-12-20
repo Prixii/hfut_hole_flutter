@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hfut_hole_flutter/components/common/hoverable_icon.dart';
+import 'package:hfut_hole_flutter/components/common/image_viewer.dart';
 import 'package:hfut_hole_flutter/components/common/user_avatar.dart';
 import 'package:hfut_hole_flutter/components/hole_detail/top_bar.dart';
 import 'package:hfut_hole_flutter/riverpod/global/page_state_provider.dart';
@@ -59,8 +60,14 @@ class HoleDetail extends ConsumerWidget {
             crossAxisCount: 3,
           ),
           itemCount: hole.imgs.length,
-          itemBuilder: (context, index) =>
-              CachedNetworkImage(imageUrl: hole.imgs[index]),
+          itemBuilder: (context, index) => GestureDetector(
+              onTap: () => {
+                    showDialog(
+                      context: context,
+                      builder: (_) => ImageViewer(index: index),
+                    )
+                  },
+              child: CachedNetworkImage(imageUrl: hole.imgs[index])),
         );
       }
     }
@@ -82,7 +89,8 @@ class HoleDetail extends ConsumerWidget {
         children: [
           buildFavoriteIcon(),
           const SizedBox(width: 5),
-          const HoverableIcon(
+          HoverableIcon(
+            onTap: () => {},
             iconData: UniconsSolid.ellipsis_v,
           )
         ],

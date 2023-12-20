@@ -11,7 +11,7 @@ class Vote with _$Vote {
     required String type,
     required String endTime,
     required List<VoteItem> items,
-    required bool isVoted,
+    required int isVoted,
     required int totalCount,
     required bool isExpired,
   }) = _Vote;
@@ -26,7 +26,7 @@ class VoteItem with _$VoteItem {
     required String createAt,
     required String option,
     required int count,
-    required bool isVoted,
+    required int isVoted,
   }) = _VoteItem;
   factory VoteItem.fromJson(Map<String, dynamic> json) =>
       _$VoteItemFromJson(json);

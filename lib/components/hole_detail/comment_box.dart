@@ -57,17 +57,27 @@ class _CommentBoxState extends ConsumerState<CommentBox> {
     );
   }
 
-  Container _buildSendButton() {
-    return Container(
-      width: 30,
-      height: 30,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15),
-        color: sendButtonColor,
-      ),
-      child: const Icon(
-        UniconsLine.message,
-        color: Colors.white,
+  Widget _buildSendButton() {
+    return GestureDetector(
+      onTap: () {
+        if (_mainCommentController.text.isNotEmpty) {
+          _mainCommentController.clear();
+          setState(() {
+            sendButtonColor = Colors.grey[100];
+          });
+        }
+      },
+      child: Container(
+        width: 30,
+        height: 30,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(15),
+          color: sendButtonColor,
+        ),
+        child: const Icon(
+          UniconsLine.message,
+          color: Colors.white,
+        ),
       ),
     );
   }
@@ -79,7 +89,10 @@ class _CommentBoxState extends ConsumerState<CommentBox> {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
       ),
-      child: const HoverableIcon(iconData: UniconsLine.smile_squint_wink_alt),
+      child: HoverableIcon(
+        iconData: UniconsLine.smile_squint_wink_alt,
+        onTap: () => {},
+      ),
     );
   }
 

@@ -20,6 +20,7 @@ class _TopBarState extends ConsumerState<TopBar> {
       height: 48,
       child: Hoverable(
         borderRadius: 8,
+        onTap: () => {},
         child: GestureDetector(
           child: SizedBox(
             width: 64,

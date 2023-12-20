@@ -1,6 +1,8 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:hfut_hole_flutter/main.dart';
 import 'package:hfut_hole_flutter/model/enums.dart';
 import 'package:hfut_hole_flutter/model/hole/hole.dart';
+import 'package:hfut_hole_flutter/network/hole.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'page_state_provider.freezed.dart';
@@ -37,6 +39,27 @@ class PageState extends _$PageState {
   void setPage(Pages page) {
     var newAppState = state.appState.copyWith(
       page: page,
+    );
+    state = state.copyWith(appState: newAppState);
+  }
+
+  Future<void> fetchMoreHole() async {
+    var response = await holeClient.getHoleListRequest();
+    if (response.statusCode == 200) {
+      logger.i(response.data);
+      if (response.data["data"]["items"] != null) {
+        List<Hole> list = [];
+        for (var item in response.data["data"]["items"]) {
+          list.add(Hole.fromJson(item));
+        }
+        _addHolesToList(list);
+      }
+    }
+  }
+
+  void _addHolesToList(List<Hole> newHoles) {
+    var newAppState = state.appState.copyWith(
+      holeList: state.appState.holeList + newHoles,
     );
     state = state.copyWith(appState: newAppState);
   }
@@ -77,10 +100,12 @@ class AppStateData with _$AppStateData {
   const factory AppStateData({
     required Pages page,
     required bool showHole,
+    required List<Hole> holeList,
   }) = _AppStateData;
 
   factory AppStateData.init() => const AppStateData(
         page: Pages.home,
         showHole: false,
+        holeList: [],
       );
 }

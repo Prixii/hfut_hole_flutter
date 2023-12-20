@@ -47,3 +47,14 @@ flutter:
     - assets/images/
     - assets/images/poster.png
     - assets/images/avatar.png
+    - assets/emoji/18jin.png
+    - assets/emoji/666.png
+    - assets/emoji/aimu.png
+    - assets/emoji/anzhongguancha.png
+    - assets/emoji/baiyan.png
+    - assets/emoji/baobaoni.png
+    - assets/emoji/baoquan.png
+    - assets/emoji/bianpao.png
+    - assets/emoji/bishi.png
+    # TODO emoji添加
+    

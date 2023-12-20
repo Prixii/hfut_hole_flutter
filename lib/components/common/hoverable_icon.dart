@@ -10,6 +10,7 @@ class HoverableIcon extends StatelessWidget {
     Color? inactiveColor,
     double? size,
     double? iconSize,
+    required this.onTap,
   })  : iconColor = iconColor ?? Colors.black,
         activeColor = activeColor ?? Colors.grey,
         inactiveColor = inactiveColor ?? Colors.transparent,
@@ -22,6 +23,7 @@ class HoverableIcon extends StatelessWidget {
   final Color inactiveColor;
   final double size;
   final double iconSize;
+  final void Function() onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +36,7 @@ class HoverableIcon extends StatelessWidget {
         color: iconColor,
         size: iconSize,
       ),
+      onTap: onTap,
     );
   }
 }

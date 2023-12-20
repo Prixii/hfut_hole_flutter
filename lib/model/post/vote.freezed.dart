@@ -25,7 +25,7 @@ mixin _$Vote {
   String get type => throw _privateConstructorUsedError;
   String get endTime => throw _privateConstructorUsedError;
   List<VoteItem> get items => throw _privateConstructorUsedError;
-  bool get isVoted => throw _privateConstructorUsedError;
+  int get isVoted => throw _privateConstructorUsedError;
   int get totalCount => throw _privateConstructorUsedError;
   bool get isExpired => throw _privateConstructorUsedError;
 
@@ -45,7 +45,7 @@ abstract class $VoteCopyWith<$Res> {
       String type,
       String endTime,
       List<VoteItem> items,
-      bool isVoted,
+      int isVoted,
       int totalCount,
       bool isExpired});
 }
@@ -96,7 +96,7 @@ class _$VoteCopyWithImpl<$Res, $Val extends Vote>
       isVoted: null == isVoted
           ? _value.isVoted
           : isVoted // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as int,
       totalCount: null == totalCount
           ? _value.totalCount
           : totalCount // ignore: cast_nullable_to_non_nullable
@@ -122,7 +122,7 @@ abstract class _$$VoteImplCopyWith<$Res> implements $VoteCopyWith<$Res> {
       String type,
       String endTime,
       List<VoteItem> items,
-      bool isVoted,
+      int isVoted,
       int totalCount,
       bool isExpired});
 }
@@ -170,7 +170,7 @@ class __$$VoteImplCopyWithImpl<$Res>
       isVoted: null == isVoted
           ? _value.isVoted
           : isVoted // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as int,
       totalCount: null == totalCount
           ? _value.totalCount
           : totalCount // ignore: cast_nullable_to_non_nullable
@@ -217,7 +217,7 @@ class _$VoteImpl implements _Vote {
   }
 
   @override
-  final bool isVoted;
+  final int isVoted;
   @override
   final int totalCount;
   @override
@@ -280,7 +280,7 @@ abstract class _Vote implements Vote {
       required final String type,
       required final String endTime,
       required final List<VoteItem> items,
-      required final bool isVoted,
+      required final int isVoted,
       required final int totalCount,
       required final bool isExpired}) = _$VoteImpl;
 
@@ -297,7 +297,7 @@ abstract class _Vote implements Vote {
   @override
   List<VoteItem> get items;
   @override
-  bool get isVoted;
+  int get isVoted;
   @override
   int get totalCount;
   @override
@@ -318,7 +318,7 @@ mixin _$VoteItem {
   String get createAt => throw _privateConstructorUsedError;
   String get option => throw _privateConstructorUsedError;
   int get count => throw _privateConstructorUsedError;
-  bool get isVoted => throw _privateConstructorUsedError;
+  int get isVoted => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -332,7 +332,7 @@ abstract class $VoteItemCopyWith<$Res> {
       _$VoteItemCopyWithImpl<$Res, VoteItem>;
   @useResult
   $Res call(
-      {String id, String createAt, String option, int count, bool isVoted});
+      {String id, String createAt, String option, int count, int isVoted});
 }
 
 /// @nodoc
@@ -374,7 +374,7 @@ class _$VoteItemCopyWithImpl<$Res, $Val extends VoteItem>
       isVoted: null == isVoted
           ? _value.isVoted
           : isVoted // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as int,
     ) as $Val);
   }
 }
@@ -388,7 +388,7 @@ abstract class _$$VoteItemImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String id, String createAt, String option, int count, bool isVoted});
+      {String id, String createAt, String option, int count, int isVoted});
 }
 
 /// @nodoc
@@ -428,7 +428,7 @@ class __$$VoteItemImplCopyWithImpl<$Res>
       isVoted: null == isVoted
           ? _value.isVoted
           : isVoted // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as int,
     ));
   }
 }
@@ -455,7 +455,7 @@ class _$VoteItemImpl implements _VoteItem {
   @override
   final int count;
   @override
-  final bool isVoted;
+  final int isVoted;
 
   @override
   String toString() {
@@ -500,7 +500,7 @@ abstract class _VoteItem implements VoteItem {
       required final String createAt,
       required final String option,
       required final int count,
-      required final bool isVoted}) = _$VoteItemImpl;
+      required final int isVoted}) = _$VoteItemImpl;
 
   factory _VoteItem.fromJson(Map<String, dynamic> json) =
       _$VoteItemImpl.fromJson;
@@ -514,7 +514,7 @@ abstract class _VoteItem implements VoteItem {
   @override
   int get count;
   @override
-  bool get isVoted;
+  int get isVoted;
   @override
   @JsonKey(ignore: true)
   _$$VoteItemImplCopyWith<_$VoteItemImpl> get copyWith =>

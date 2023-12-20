@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hfut_hole_flutter/components/common/hoverable_icon.dart';
@@ -139,8 +140,9 @@ class HoleCard extends ConsumerWidget {
   }
 
   Widget _buildMoreIcon() {
-    return const HoverableIcon(
+    return HoverableIcon(
       iconData: UniconsSolid.ellipsis_v,
+      onTap: () => {},
       size: 20,
     );
   }
@@ -184,10 +186,13 @@ class HoleCard extends ConsumerWidget {
                   ? Container()
                   : ClipRRect(
                       borderRadius: const BorderRadius.all(Radius.circular(8)),
-                      child: Image.network(
-                        hole.imgs[0],
+                      child: CachedNetworkImage(
+                        imageUrl: hole.imgs[0],
                         width: double.infinity,
                         fit: BoxFit.fitWidth,
+                        placeholder: (context, url) => Container(
+                          color: Colors.grey,
+                        ),
                       ),
                     ),
             ),

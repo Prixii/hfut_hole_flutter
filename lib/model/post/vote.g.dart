@@ -14,7 +14,7 @@ _$VoteImpl _$$VoteImplFromJson(Map<String, dynamic> json) => _$VoteImpl(
       items: (json['items'] as List<dynamic>)
           .map((e) => VoteItem.fromJson(e as Map<String, dynamic>))
           .toList(),
-      isVoted: json['isVoted'] as bool,
+      isVoted: json['isVoted'] as int,
       totalCount: json['totalCount'] as int,
       isExpired: json['isExpired'] as bool,
     );
@@ -37,7 +37,7 @@ _$VoteItemImpl _$$VoteItemImplFromJson(Map<String, dynamic> json) =>
       createAt: json['createAt'] as String,
       option: json['option'] as String,
       count: json['count'] as int,
-      isVoted: json['isVoted'] as bool,
+      isVoted: json['isVoted'] as int,
     );
 
 Map<String, dynamic> _$$VoteItemImplToJson(_$VoteItemImpl instance) =>

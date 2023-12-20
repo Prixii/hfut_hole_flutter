@@ -468,6 +468,7 @@ abstract class _HoleStateData implements HoleStateData {
 mixin _$AppStateData {
   Pages get page => throw _privateConstructorUsedError;
   bool get showHole => throw _privateConstructorUsedError;
+  List<Hole> get holeList => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AppStateDataCopyWith<AppStateData> get copyWith =>
@@ -480,7 +481,7 @@ abstract class $AppStateDataCopyWith<$Res> {
           AppStateData value, $Res Function(AppStateData) then) =
       _$AppStateDataCopyWithImpl<$Res, AppStateData>;
   @useResult
-  $Res call({Pages page, bool showHole});
+  $Res call({Pages page, bool showHole, List<Hole> holeList});
 }
 
 /// @nodoc
@@ -498,6 +499,7 @@ class _$AppStateDataCopyWithImpl<$Res, $Val extends AppStateData>
   $Res call({
     Object? page = null,
     Object? showHole = null,
+    Object? holeList = null,
   }) {
     return _then(_value.copyWith(
       page: null == page
@@ -508,6 +510,10 @@ class _$AppStateDataCopyWithImpl<$Res, $Val extends AppStateData>
           ? _value.showHole
           : showHole // ignore: cast_nullable_to_non_nullable
               as bool,
+      holeList: null == holeList
+          ? _value.holeList
+          : holeList // ignore: cast_nullable_to_non_nullable
+              as List<Hole>,
     ) as $Val);
   }
 }
@@ -520,7 +526,7 @@ abstract class _$$AppStateDataImplCopyWith<$Res>
       __$$AppStateDataImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Pages page, bool showHole});
+  $Res call({Pages page, bool showHole, List<Hole> holeList});
 }
 
 /// @nodoc
@@ -536,6 +542,7 @@ class __$$AppStateDataImplCopyWithImpl<$Res>
   $Res call({
     Object? page = null,
     Object? showHole = null,
+    Object? holeList = null,
   }) {
     return _then(_$AppStateDataImpl(
       page: null == page
@@ -546,6 +553,10 @@ class __$$AppStateDataImplCopyWithImpl<$Res>
           ? _value.showHole
           : showHole // ignore: cast_nullable_to_non_nullable
               as bool,
+      holeList: null == holeList
+          ? _value._holeList
+          : holeList // ignore: cast_nullable_to_non_nullable
+              as List<Hole>,
     ));
   }
 }
@@ -553,16 +564,27 @@ class __$$AppStateDataImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$AppStateDataImpl implements _AppStateData {
-  const _$AppStateDataImpl({required this.page, required this.showHole});
+  const _$AppStateDataImpl(
+      {required this.page,
+      required this.showHole,
+      required final List<Hole> holeList})
+      : _holeList = holeList;
 
   @override
   final Pages page;
   @override
   final bool showHole;
+  final List<Hole> _holeList;
+  @override
+  List<Hole> get holeList {
+    if (_holeList is EqualUnmodifiableListView) return _holeList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_holeList);
+  }
 
   @override
   String toString() {
-    return 'AppStateData(page: $page, showHole: $showHole)';
+    return 'AppStateData(page: $page, showHole: $showHole, holeList: $holeList)';
   }
 
   @override
@@ -572,11 +594,13 @@ class _$AppStateDataImpl implements _AppStateData {
             other is _$AppStateDataImpl &&
             (identical(other.page, page) || other.page == page) &&
             (identical(other.showHole, showHole) ||
-                other.showHole == showHole));
+                other.showHole == showHole) &&
+            const DeepCollectionEquality().equals(other._holeList, _holeList));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, page, showHole);
+  int get hashCode => Object.hash(runtimeType, page, showHole,
+      const DeepCollectionEquality().hash(_holeList));
 
   @JsonKey(ignore: true)
   @override
@@ -588,12 +612,15 @@ class _$AppStateDataImpl implements _AppStateData {
 abstract class _AppStateData implements AppStateData {
   const factory _AppStateData(
       {required final Pages page,
-      required final bool showHole}) = _$AppStateDataImpl;
+      required final bool showHole,
+      required final List<Hole> holeList}) = _$AppStateDataImpl;
 
   @override
   Pages get page;
   @override
   bool get showHole;
+  @override
+  List<Hole> get holeList;
   @override
   @JsonKey(ignore: true)
   _$$AppStateDataImplCopyWith<_$AppStateDataImpl> get copyWith =>

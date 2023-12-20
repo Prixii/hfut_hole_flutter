@@ -21,13 +21,13 @@ class NavigatorItem extends ConsumerWidget {
 
     return SizedBox(
       height: 56,
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(8, 4, 8, 4),
-        child: Hoverable(
-          borderRadius: 16,
-          child: GestureDetector(
-            onTap: () =>
-                ref.read(pageStateProvider.notifier).setPage(targetPage),
+      child: GestureDetector(
+        onTap: () => ref.read(pageStateProvider.notifier).setPage(targetPage),
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(8, 4, 8, 4),
+          child: Hoverable(
+            onTap: () => {},
+            borderRadius: 16,
             child: Column(
               children: [
                 Container(

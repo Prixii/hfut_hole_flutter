@@ -99,6 +99,7 @@ class Home extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(8, 4, 8, 4),
       child: Hoverable(
         borderRadius: 16,
+        onTap: () => {},
         child: SizedBox(
           height: 48,
           child: Center(
