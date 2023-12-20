@@ -1,5 +1,6 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hfut_hole_flutter/components/common/hoverable_icon.dart';
 import 'package:hfut_hole_flutter/components/common/user_avatar.dart';
 import 'package:hfut_hole_flutter/model/hole/hole.dart';
 import 'package:hfut_hole_flutter/riverpod/global/page_state_provider.dart';
@@ -112,7 +113,7 @@ class HoleCard extends ConsumerWidget {
         const SizedBox(width: 12),
         _buildFavoriteIcon(),
         const SizedBox(width: 5),
-        const Icon(UniconsSolid.ellipsis_v),
+        _buildMoreIcon(),
       ],
     );
   }
@@ -134,6 +135,13 @@ class HoleCard extends ConsumerWidget {
         const SizedBox(width: 5),
         Text(hole.favoriteCounts > 99 ? "99+" : hole.favoriteCounts.toString()),
       ],
+    );
+  }
+
+  Widget _buildMoreIcon() {
+    return const HoverableIcon(
+      iconData: UniconsSolid.ellipsis_v,
+      size: 20,
     );
   }
 

@@ -1,13 +1,16 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hfut_hole_flutter/components/common/hole_masonry_layout.dart';
+import 'package:hfut_hole_flutter/components/common/hoverable.dart';
 import 'package:hfut_hole_flutter/components/common/title_bar.dart';
 import 'package:hfut_hole_flutter/gen/assets.gen.dart';
+import 'package:hfut_hole_flutter/model/enums.dart';
 import 'package:hfut_hole_flutter/page/hole_detail/index.dart';
 import 'package:hfut_hole_flutter/riverpod/global/page_state_provider.dart';
-import 'package:hfut_hole_flutter/theme/theme.dart';
 import 'package:hfut_hole_flutter/util/widget_util.dart';
 import 'package:unicons/unicons.dart';
+
+import '../../components/home/navigator_item.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -62,28 +65,45 @@ class Home extends StatelessWidget {
               _buildAvatar(),
               const Divider(),
               const NavigatorItem(
+                  targetPage: Pages.home,
                   child: Icon(
-                UniconsLine.estate,
-                fill: 1.0,
-                size: iconSize,
-              )),
+                    UniconsLine.estate,
+                    fill: 1.0,
+                    size: iconSize,
+                  )),
               const NavigatorItem(
+                  targetPage: Pages.space,
                   child: Icon(
-                UniconsLine.golf_ball,
-                size: iconSize,
-              )),
+                    UniconsLine.golf_ball,
+                    size: iconSize,
+                  )),
               const NavigatorItem(
+                  targetPage: Pages.message,
                   child: Icon(
-                UniconsLine.comment_alt_exclamation,
-                size: iconSize,
-              )),
+                    UniconsLine.comment_alt_exclamation,
+                    size: iconSize,
+                  )),
               const Divider(),
-              const NavigatorItem(
-                  child: Icon(
-                UniconsLine.plus_circle,
-                size: iconSize,
-              )),
+              _buildCreateHoleButton(iconSize),
             ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildCreateHoleButton(double iconSize) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(8, 4, 8, 4),
+      child: Hoverable(
+        borderRadius: 16,
+        child: SizedBox(
+          height: 48,
+          child: Center(
+            child: Icon(
+              UniconsLine.plus_circle,
+              size: iconSize,
+            ),
           ),
         ),
       ),
@@ -177,45 +197,5 @@ class Home extends StatelessWidget {
             ],
           ),
         ));
-  }
-}
-
-class NavigatorItem extends StatefulWidget {
-  const NavigatorItem({
-    super.key,
-    required this.child,
-  });
-
-  final Widget child;
-
-  @override
-  State<NavigatorItem> createState() => _NavigatorItemState();
-}
-
-class _NavigatorItemState extends State<NavigatorItem> {
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 60,
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(4, 0, 4, 4),
-        child: Column(
-          children: [
-            Expanded(child: widget.child),
-            Container(
-              height: 4,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(2),
-                color: primaryColor,
-              ),
-              width: 36,
-            ),
-            Container(
-              height: 12,
-            ),
-          ],
-        ),
-      ),
-    );
   }
 }

@@ -33,6 +33,13 @@ class PageState extends _$PageState {
     );
     state = state.copyWith(appState: newAppState);
   }
+
+  void setPage(Pages page) {
+    var newAppState = state.appState.copyWith(
+      page: page,
+    );
+    state = state.copyWith(appState: newAppState);
+  }
 }
 
 @freezed

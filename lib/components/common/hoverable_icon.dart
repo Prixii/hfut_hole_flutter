@@ -1,6 +1,7 @@
 import 'package:fluent_ui/fluent_ui.dart';
+import 'package:hfut_hole_flutter/components/common/hoverable.dart';
 
-class HoverableIcon extends StatefulWidget {
+class HoverableIcon extends StatelessWidget {
   const HoverableIcon({
     super.key,
     required this.iconData,
@@ -23,41 +24,15 @@ class HoverableIcon extends StatefulWidget {
   final double iconSize;
 
   @override
-  State<HoverableIcon> createState() => _HoverableIconState();
-}
-
-class _HoverableIconState extends State<HoverableIcon> {
-  late Color background;
-
-  @override
-  void initState() {
-    background = widget.inactiveColor;
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return MouseRegion(
-      onEnter: (_) => setState(() {
-        background = widget.activeColor.withOpacity(0.3);
-      }),
-      onExit: (_) => {
-        setState(() {
-          background = widget.inactiveColor;
-        })
-      },
-      child: Container(
-        width: widget.size,
-        height: widget.size,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(widget.size / 2),
-          color: background,
-        ),
-        child: Icon(
-          widget.iconData,
-          color: widget.iconColor,
-          size: widget.iconSize,
-        ),
+    return Hoverable(
+      activeColor: activeColor,
+      inactiveColor: inactiveColor,
+      borderRadius: 15,
+      child: Icon(
+        iconData,
+        color: iconColor,
+        size: iconSize,
       ),
     );
   }

@@ -41,7 +41,7 @@ class _CommentListState extends ConsumerState<CommentList> {
                       CommentListTile(comment: comments[index]),
                   itemCount: comments.length),
             ),
-            CommentBox(),
+            const CommentBox(),
           ],
         ),
       ),

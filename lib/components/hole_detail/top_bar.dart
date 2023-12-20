@@ -1,5 +1,6 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hfut_hole_flutter/components/common/hoverable.dart';
 import 'package:hfut_hole_flutter/riverpod/global/page_state_provider.dart';
 import 'package:unicons/unicons.dart';
 
@@ -13,26 +14,14 @@ class TopBar extends ConsumerStatefulWidget {
 }
 
 class _TopBarState extends ConsumerState<TopBar> {
-  final Color inactiveColor = Colors.transparent;
-  final Color activeColor = Colors.grey[20];
-  var isHovered = false;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 48,
-      child: MouseRegion(
-        onEnter: (event) => setState(() {
-          isHovered = true;
-        }),
-        onExit: (event) => setState(() {
-          isHovered = false;
-        }),
+      child: Hoverable(
+        borderRadius: 8,
         child: GestureDetector(
-          child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12),
-              color: isHovered ? activeColor : inactiveColor,
-            ),
+          child: SizedBox(
             width: 64,
             child: Row(
               children: [
