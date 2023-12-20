@@ -1,5 +1,7 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hfut_hole_flutter/env/env.dart';
+import 'package:hfut_hole_flutter/model/app_profile.dart';
 import 'package:hfut_hole_flutter/router.dart';
 import 'package:hfut_hole_flutter/theme/theme.dart';
 import 'package:logger/logger.dart';
@@ -17,6 +19,8 @@ main() async {
     await windowManager.show();
     await windowManager.focus();
   });
+  await AppProfile.init();
+
   runApp(const ProviderScope(child: MainApp()));
 }
 

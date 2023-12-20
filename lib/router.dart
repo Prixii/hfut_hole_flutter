@@ -1,15 +1,21 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hfut_hole_flutter/model/app_profile.dart';
 import 'package:hfut_hole_flutter/page/hello/index.dart';
 import 'package:hfut_hole_flutter/page/home/index.dart';
-
-// TODO Auto Router
 
 final GoRouter router = GoRouter(
   routes: [
     GoRoute(
       path: "/",
-      builder: (context, state) => const Hello(),
+      builder: (context, state) {
+        // TODO 测试token有效性
+        if (AppProfile.autoLogin) {
+          return const Home();
+        } else {
+          return const Hello();
+        }
+      },
     ),
     GoRoute(
       path: "/home",

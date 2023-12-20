@@ -1,27 +1,20 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
-
-part 'app_profile.freezed.dart';
-part 'app_profile.g.dart';
-
-@riverpod
-class AppProfile extends _$AppProfile {
-  @override
-  AppProfile build() {
-    return AppProfile();
+class AppProfile {
+  static SharedPreferences? _prefs;
+  static Future<void> init() async {
+    _prefs = await SharedPreferences.getInstance();
   }
-}
 
-@freezed
-class AppProfileData with _$AppProfileData {
-  const factory AppProfileData({
-    @Default("") String studentId,
-    @Default("") String password,
-    @Default("") String token,
-  }) = _AppProfileData;
+  static String get studentId => _prefs!.getString('studentId') ?? '';
+  static String get password => _prefs!.getString('password') ?? '';
+  static String get token => _prefs!.getString('token') ?? '';
+  static bool get rememberMe => _prefs!.getBool('rememberMe') ?? false;
+  static bool get autoLogin => _prefs!.getBool('autoLogin') ?? false;
 
-  factory AppProfileData.fromJson(Map<String, dynamic> json) =>
-      _$AppProfileDataFromJson(json);
+  static set studentId(String value) => _prefs!.setString('studentId', value);
+  static set password(String value) => _prefs!.setString('password', value);
+  static set token(String value) => _prefs!.setString('token', value);
+  static set rememberMe(bool value) => _prefs!.setBool('rememberMe', value);
+  static set autoLogin(bool value) => _prefs!.setBool('autoLogin', value);
 }

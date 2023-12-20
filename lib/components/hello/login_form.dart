@@ -1,6 +1,8 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hfut_hole_flutter/components/hello/bottom_button.dart';
+import 'package:hfut_hole_flutter/main.dart';
+import 'package:hfut_hole_flutter/model/app_profile.dart';
 import 'package:hfut_hole_flutter/util/widget_util.dart';
 
 class LoginForm extends StatefulWidget {
@@ -12,10 +14,24 @@ class LoginForm extends StatefulWidget {
 
 class _LoginFormState extends State<LoginForm>
     with SingleTickerProviderStateMixin {
-  bool autoLogin = false;
-  bool rememberMe = false;
+  late bool _autoLogin;
+  late bool _rememberMe;
 
   late TextEditingController _studentIdController, _passwordController;
+
+  @override
+  void initState() {
+    _studentIdController = TextEditingController();
+    _passwordController = TextEditingController();
+
+    _studentIdController.text = AppProfile.studentId;
+    _autoLogin = AppProfile.autoLogin;
+    _rememberMe = AppProfile.rememberMe;
+
+    logger.d('[id]: ${AppProfile.studentId}');
+
+    super.initState();
+  }
 
   @override
   void dispose() {
@@ -24,32 +40,27 @@ class _LoginFormState extends State<LoginForm>
     super.dispose();
   }
 
-  @override
-  void initState() {
-    _studentIdController = TextEditingController();
-    _passwordController = TextEditingController();
-    super.initState();
-  }
-
   Widget _buildCheckBoxGroup() {
     return Row(
       children: [
         Expanded(
           child: buildCheckBox(
-            rememberMe,
+            _rememberMe,
             label: "记住我",
-            onChanged: (v) => setState(() => rememberMe = v),
+            onChanged: (v) => setState(() {
+              _rememberMe = v;
+            }),
           ),
         ),
         Expanded(
           child: buildCheckBox(
-            autoLogin,
+            _autoLogin,
             label: "自动登录",
             onChanged: (v) {
-              if (v && !rememberMe) {
-                rememberMe = true;
+              if (v && !_rememberMe) {
+                _rememberMe = true;
               }
-              setState(() => autoLogin = v);
+              setState(() => _autoLogin = v);
             },
           ),
         )

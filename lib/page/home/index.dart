@@ -64,22 +64,24 @@ class Home extends StatelessWidget {
             children: [
               _buildAvatar(),
               const Divider(),
-              const NavigatorItem(
+              NavigatorItem(
                   targetPage: Pages.home,
                   child: Icon(
                     UniconsLine.estate,
-                    fill: 1.0,
+                    color: Colors.grey[80],
                     size: iconSize,
                   )),
-              const NavigatorItem(
+              NavigatorItem(
                   targetPage: Pages.space,
                   child: Icon(
                     UniconsLine.golf_ball,
+                    color: Colors.grey[80],
                     size: iconSize,
                   )),
-              const NavigatorItem(
+              NavigatorItem(
                   targetPage: Pages.message,
                   child: Icon(
+                    color: Colors.grey[80],
                     UniconsLine.comment_alt_exclamation,
                     size: iconSize,
                   )),
@@ -103,6 +105,7 @@ class Home extends StatelessWidget {
             child: Icon(
               UniconsLine.plus_circle,
               size: iconSize,
+              color: Colors.grey[80],
             ),
           ),
         ),

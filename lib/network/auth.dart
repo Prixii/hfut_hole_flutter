@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:hfut_hole_flutter/env/env.dart';
+import 'package:hfut_hole_flutter/model/app_profile.dart';
 
 final AuthClient authClient = AuthClient();
 
@@ -21,12 +22,22 @@ class AuthClient {
     required bool rememberMe,
     required bool autoLogin,
   }) async {
-    return await httpClient.post(
+    var response = await httpClient.post(
       "/auth/login",
       data: {
         "studentId": studentId,
         "password": password,
       },
     );
+    if (response.statusCode == 200) {
+      AppProfile.autoLogin = autoLogin;
+      AppProfile.rememberMe = rememberMe;
+      AppProfile.token = "Bearer ${response.data["token"]}";
+      if (rememberMe) {
+        AppProfile.studentId = studentId.toString();
+        AppProfile.password = password;
+      }
+    }
+    return response;
   }
 }

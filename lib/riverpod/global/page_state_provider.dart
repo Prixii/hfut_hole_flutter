@@ -79,7 +79,7 @@ class AppStateData with _$AppStateData {
     required bool showHole,
   }) = _AppStateData;
 
-  factory AppStateData.init() => AppStateData(
+  factory AppStateData.init() => const AppStateData(
         page: Pages.home,
         showHole: false,
       );

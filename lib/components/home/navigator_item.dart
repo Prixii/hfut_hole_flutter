@@ -38,7 +38,7 @@ class NavigatorItem extends ConsumerWidget {
                     duration: const Duration(milliseconds: 300),
                     curve: Curves.bounceInOut,
                     tween: Tween<double>(
-                        begin: isActive ? 0 : 0.8, end: isActive ? 0.8 : 0),
+                        begin: isActive ? 0 : 1, end: isActive ? 1 : 0),
                     builder: (_, value, __) => ShaderMask(
                         shaderCallback: (Rect bounds) {
                           return RadialGradient(
