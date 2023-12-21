@@ -13,79 +13,53 @@ class HoleCard extends ConsumerWidget {
 
   final Hole hole;
 
-  Widget _buildInfoWithTitle() {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: _calcBorderRadius(),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            spreadRadius: 0,
-            blurRadius: 4,
-            offset: const Offset(0, -2),
-          ),
-        ],
-      ),
-      height: 80,
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Align(
-          alignment: Alignment.topLeft,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Text(
+  Widget _buildTitle() {
+    return hole.title != null
+        ? Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Align(
+              alignment: Alignment.topLeft,
+              child: Text(
                 hole.title!,
                 style: fontSubTitleBold,
-                maxLines: 1,
+                maxLines: 2,
                 overflow: TextOverflow.ellipsis,
               ),
-              Expanded(child: Container()),
-              _buildUserInfoAndIcon(),
-            ],
-          ),
-        ),
-      ),
-    );
+            ),
+          )
+        : Container();
   }
 
-  Widget _buildInfoWithBody() {
+  Container _buildBaseCard(Widget child) {
     return Container(
+      constraints: const BoxConstraints(maxHeight: 500),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: _calcBorderRadius(),
+        borderRadius: BorderRadius.circular(8.0),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
+            color: Colors.black.withOpacity(0.2),
             spreadRadius: 0,
             blurRadius: 8,
             offset: const Offset(0, 0),
           ),
         ],
       ),
-      height: 160,
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Align(
-          alignment: Alignment.topLeft,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Text(
-                hole.body ?? "",
-                maxLines: 5,
-                overflow: TextOverflow.ellipsis,
-              ),
-              Expanded(child: Container()),
-              _buildUserInfoAndIcon(),
-            ],
-          ),
-        ),
-      ),
+      child: child,
     );
+  }
+
+  Widget _buildBody() {
+    return hole.body != null
+        ? Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              hole.body!,
+              maxLines: 5,
+              overflow: TextOverflow.ellipsis,
+            ),
+          )
+        : Container();
   }
 
   Widget _buildUserInfoAndIcon() {
@@ -147,15 +121,24 @@ class HoleCard extends ConsumerWidget {
     );
   }
 
-  BorderRadius _calcBorderRadius() {
-    if (hole.imgs.isEmpty) {
-      return const BorderRadius.all(Radius.circular(8));
-    } else {
-      return const BorderRadius.only(
-        bottomLeft: Radius.circular(8),
-        bottomRight: Radius.circular(8),
-      );
-    }
+  Widget _buildImage() {
+    return hole.imgs.isEmpty
+        ? Container()
+        : ClipRRect(
+            borderRadius: const BorderRadius.all(Radius.circular(8)),
+            child: Container(
+              constraints: const BoxConstraints(maxHeight: 300),
+              child: CachedNetworkImage(
+                imageUrl: hole.imgs[0],
+                width: double.infinity,
+                fit: BoxFit.fitWidth,
+                placeholder: (context, url) => Container(
+                  height: 200,
+                  color: Colors.grey,
+                ),
+              ),
+            ),
+          );
   }
 
   @override
@@ -166,38 +149,25 @@ class HoleCard extends ConsumerWidget {
         onTap: () {
           ref.read(pageStateProvider.notifier).openHole(hole);
         },
-        child: Stack(
-          alignment: Alignment.bottomCenter,
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.grey[40],
-                borderRadius: const BorderRadius.all(Radius.circular(8)),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.1),
-                    spreadRadius: 0,
-                    blurRadius: 5,
-                    offset: const Offset(0, 0),
-                  ),
-                ],
+        child: _buildBaseCard(
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              _buildImage(),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _buildTitle(),
+                    _buildBody(),
+                    _buildUserInfoAndIcon()
+                  ],
+                ),
               ),
-              child: hole.imgs.isEmpty
-                  ? Container()
-                  : ClipRRect(
-                      borderRadius: const BorderRadius.all(Radius.circular(8)),
-                      child: CachedNetworkImage(
-                        imageUrl: hole.imgs[0],
-                        width: double.infinity,
-                        fit: BoxFit.fitWidth,
-                        placeholder: (context, url) => Container(
-                          color: Colors.grey,
-                        ),
-                      ),
-                    ),
-            ),
-            hole.title != null ? _buildInfoWithTitle() : _buildInfoWithBody(),
-          ],
+            ],
+          ),
         ),
       ),
     );

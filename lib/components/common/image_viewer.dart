@@ -41,7 +41,7 @@ class _ImageViewerState extends ConsumerState<ImageViewer> {
         child: Column(children: [
           Expanded(
             child: InteractiveViewer(
-              maxScale: 5,
+              maxScale: 10,
               child: RotatedBox(
                 quarterTurns: quarterTurns,
                 child: CachedNetworkImage(

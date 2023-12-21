@@ -43,11 +43,18 @@ class PageState extends _$PageState {
     state = state.copyWith(appState: newAppState);
   }
 
-  Future<void> fetchMoreHole() async {
-    var response = await holeClient.getHoleListRequest();
+  Future<void> fetchMoreHole(int? page, int? limit) async {
+    var response = await holeClient.getHoleListRequest(
+        page: page ?? state.appState.holeListPage,
+        limit: limit ?? state.appState.holeListLimit);
     if (response.statusCode == 200) {
       logger.i(response.data);
       if (response.data["data"]["items"] != null) {
+        state = state.copyWith(
+            appState: state.appState.copyWith(
+          holeListPage: state.appState.holeListPage +
+              (limit ?? state.appState.holeListLimit) ~/ 10,
+        ));
         List<Hole> list = [];
         for (var item in response.data["data"]["items"]) {
           list.add(Hole.fromJson(item));
@@ -101,11 +108,15 @@ class AppStateData with _$AppStateData {
     required Pages page,
     required bool showHole,
     required List<Hole> holeList,
+    required int holeListPage,
+    required int holeListLimit,
   }) = _AppStateData;
 
   factory AppStateData.init() => const AppStateData(
         page: Pages.home,
         showHole: false,
+        holeListPage: 1,
+        holeListLimit: 10,
         holeList: [],
       );
 }

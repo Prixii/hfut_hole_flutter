@@ -469,6 +469,8 @@ mixin _$AppStateData {
   Pages get page => throw _privateConstructorUsedError;
   bool get showHole => throw _privateConstructorUsedError;
   List<Hole> get holeList => throw _privateConstructorUsedError;
+  int get holeListPage => throw _privateConstructorUsedError;
+  int get holeListLimit => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AppStateDataCopyWith<AppStateData> get copyWith =>
@@ -481,7 +483,12 @@ abstract class $AppStateDataCopyWith<$Res> {
           AppStateData value, $Res Function(AppStateData) then) =
       _$AppStateDataCopyWithImpl<$Res, AppStateData>;
   @useResult
-  $Res call({Pages page, bool showHole, List<Hole> holeList});
+  $Res call(
+      {Pages page,
+      bool showHole,
+      List<Hole> holeList,
+      int holeListPage,
+      int holeListLimit});
 }
 
 /// @nodoc
@@ -500,6 +507,8 @@ class _$AppStateDataCopyWithImpl<$Res, $Val extends AppStateData>
     Object? page = null,
     Object? showHole = null,
     Object? holeList = null,
+    Object? holeListPage = null,
+    Object? holeListLimit = null,
   }) {
     return _then(_value.copyWith(
       page: null == page
@@ -514,6 +523,14 @@ class _$AppStateDataCopyWithImpl<$Res, $Val extends AppStateData>
           ? _value.holeList
           : holeList // ignore: cast_nullable_to_non_nullable
               as List<Hole>,
+      holeListPage: null == holeListPage
+          ? _value.holeListPage
+          : holeListPage // ignore: cast_nullable_to_non_nullable
+              as int,
+      holeListLimit: null == holeListLimit
+          ? _value.holeListLimit
+          : holeListLimit // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 }
@@ -526,7 +543,12 @@ abstract class _$$AppStateDataImplCopyWith<$Res>
       __$$AppStateDataImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Pages page, bool showHole, List<Hole> holeList});
+  $Res call(
+      {Pages page,
+      bool showHole,
+      List<Hole> holeList,
+      int holeListPage,
+      int holeListLimit});
 }
 
 /// @nodoc
@@ -543,6 +565,8 @@ class __$$AppStateDataImplCopyWithImpl<$Res>
     Object? page = null,
     Object? showHole = null,
     Object? holeList = null,
+    Object? holeListPage = null,
+    Object? holeListLimit = null,
   }) {
     return _then(_$AppStateDataImpl(
       page: null == page
@@ -557,6 +581,14 @@ class __$$AppStateDataImplCopyWithImpl<$Res>
           ? _value._holeList
           : holeList // ignore: cast_nullable_to_non_nullable
               as List<Hole>,
+      holeListPage: null == holeListPage
+          ? _value.holeListPage
+          : holeListPage // ignore: cast_nullable_to_non_nullable
+              as int,
+      holeListLimit: null == holeListLimit
+          ? _value.holeListLimit
+          : holeListLimit // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -567,7 +599,9 @@ class _$AppStateDataImpl implements _AppStateData {
   const _$AppStateDataImpl(
       {required this.page,
       required this.showHole,
-      required final List<Hole> holeList})
+      required final List<Hole> holeList,
+      required this.holeListPage,
+      required this.holeListLimit})
       : _holeList = holeList;
 
   @override
@@ -583,8 +617,13 @@ class _$AppStateDataImpl implements _AppStateData {
   }
 
   @override
+  final int holeListPage;
+  @override
+  final int holeListLimit;
+
+  @override
   String toString() {
-    return 'AppStateData(page: $page, showHole: $showHole, holeList: $holeList)';
+    return 'AppStateData(page: $page, showHole: $showHole, holeList: $holeList, holeListPage: $holeListPage, holeListLimit: $holeListLimit)';
   }
 
   @override
@@ -595,12 +634,21 @@ class _$AppStateDataImpl implements _AppStateData {
             (identical(other.page, page) || other.page == page) &&
             (identical(other.showHole, showHole) ||
                 other.showHole == showHole) &&
-            const DeepCollectionEquality().equals(other._holeList, _holeList));
+            const DeepCollectionEquality().equals(other._holeList, _holeList) &&
+            (identical(other.holeListPage, holeListPage) ||
+                other.holeListPage == holeListPage) &&
+            (identical(other.holeListLimit, holeListLimit) ||
+                other.holeListLimit == holeListLimit));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, page, showHole,
-      const DeepCollectionEquality().hash(_holeList));
+  int get hashCode => Object.hash(
+      runtimeType,
+      page,
+      showHole,
+      const DeepCollectionEquality().hash(_holeList),
+      holeListPage,
+      holeListLimit);
 
   @JsonKey(ignore: true)
   @override
@@ -613,7 +661,9 @@ abstract class _AppStateData implements AppStateData {
   const factory _AppStateData(
       {required final Pages page,
       required final bool showHole,
-      required final List<Hole> holeList}) = _$AppStateDataImpl;
+      required final List<Hole> holeList,
+      required final int holeListPage,
+      required final int holeListLimit}) = _$AppStateDataImpl;
 
   @override
   Pages get page;
@@ -621,6 +671,10 @@ abstract class _AppStateData implements AppStateData {
   bool get showHole;
   @override
   List<Hole> get holeList;
+  @override
+  int get holeListPage;
+  @override
+  int get holeListLimit;
   @override
   @JsonKey(ignore: true)
   _$$AppStateDataImplCopyWith<_$AppStateDataImpl> get copyWith =>

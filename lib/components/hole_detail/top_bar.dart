@@ -20,21 +20,18 @@ class _TopBarState extends ConsumerState<TopBar> {
       height: 48,
       child: Hoverable(
         borderRadius: 8,
-        onTap: () => {},
-        child: GestureDetector(
-          child: SizedBox(
-            width: 64,
-            child: Row(
-              children: [
-                Icon(
-                  UniconsLine.arrow_left,
-                  color: Colors.grey[100],
-                  size: 36,
-                ),
-              ],
-            ),
+        onTap: () => ref.read(pageStateProvider.notifier).closeHole(),
+        child: SizedBox(
+          width: 64,
+          child: Row(
+            children: [
+              Icon(
+                UniconsLine.arrow_left,
+                color: Colors.grey[100],
+                size: 36,
+              ),
+            ],
           ),
-          onTap: () => ref.read(pageStateProvider.notifier).closeHole(),
         ),
       ),
     );

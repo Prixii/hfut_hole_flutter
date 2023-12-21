@@ -116,7 +116,12 @@ class Home extends StatelessWidget {
 
   Widget _buildRightPart() {
     return Column(
-      children: [_buildSearchBar(), const Expanded(child: HoleMasonryLayout())],
+      children: [
+        _buildSearchBar(),
+        Expanded(
+          child: HoleMasonryLayout(),
+        ),
+      ],
     );
   }
 

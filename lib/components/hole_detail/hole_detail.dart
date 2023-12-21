@@ -58,16 +58,25 @@ class HoleDetail extends ConsumerWidget {
           shrinkWrap: true,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 3,
+            crossAxisSpacing: 8.0,
+            mainAxisSpacing: 8.0,
           ),
           itemCount: hole.imgs.length,
           itemBuilder: (context, index) => GestureDetector(
-              onTap: () => {
-                    showDialog(
-                      context: context,
-                      builder: (_) => ImageViewer(index: index),
-                    )
-                  },
-              child: CachedNetworkImage(imageUrl: hole.imgs[index])),
+            onTap: () => {
+              showDialog(
+                context: context,
+                builder: (_) => ImageViewer(index: index),
+              )
+            },
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(8),
+              child: CachedNetworkImage(
+                imageUrl: hole.imgs[index],
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
         );
       }
     }
