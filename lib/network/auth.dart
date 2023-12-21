@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:hfut_hole_flutter/main.dart';
 import 'package:hfut_hole_flutter/model/app_profile.dart';
 import 'package:hfut_hole_flutter/network/api_client.dart';
 
@@ -21,7 +20,6 @@ class AuthClient {
         "password": password,
       },
     ).then((response) {
-      logger.i(response);
       if (response.data["code"] == 200) {
         AppProfile.autoLogin = autoLogin;
         AppProfile.rememberMe = rememberMe;

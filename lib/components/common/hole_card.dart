@@ -13,23 +13,6 @@ class HoleCard extends ConsumerWidget {
 
   final Hole hole;
 
-  Widget _buildTitle() {
-    return hole.title != null
-        ? Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Align(
-              alignment: Alignment.topLeft,
-              child: Text(
-                hole.title!,
-                style: fontSubTitleBold,
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-              ),
-            ),
-          )
-        : Container();
-  }
-
   Container _buildBaseCard(Widget child) {
     return Container(
       constraints: const BoxConstraints(maxHeight: 500),
@@ -47,6 +30,43 @@ class HoleCard extends ConsumerWidget {
       ),
       child: child,
     );
+  }
+
+  Widget _buildImage() {
+    return hole.imgs.isEmpty
+        ? Container()
+        : ClipRRect(
+            borderRadius: const BorderRadius.all(Radius.circular(8)),
+            child: Container(
+              constraints: const BoxConstraints(maxHeight: 300),
+              child: CachedNetworkImage(
+                imageUrl: hole.imgs[0],
+                width: double.infinity,
+                fit: BoxFit.fitWidth,
+                placeholder: (context, url) => Container(
+                  height: 200,
+                  color: Colors.grey,
+                ),
+              ),
+            ),
+          );
+  }
+
+  Widget _buildTitle() {
+    return hole.title != null
+        ? Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Align(
+              alignment: Alignment.topLeft,
+              child: Text(
+                hole.title!,
+                style: fontSubTitleBold,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+          )
+        : Container();
   }
 
   Widget _buildBody() {
@@ -68,6 +88,7 @@ class HoleCard extends ConsumerWidget {
       child: Row(
         children: [
           UserAvatar(url: hole.user.avatar),
+          const SizedBox(width: 8),
           Expanded(
             child: Text(
               hole.user.username,
@@ -119,26 +140,6 @@ class HoleCard extends ConsumerWidget {
       onTap: () => {},
       size: 20,
     );
-  }
-
-  Widget _buildImage() {
-    return hole.imgs.isEmpty
-        ? Container()
-        : ClipRRect(
-            borderRadius: const BorderRadius.all(Radius.circular(8)),
-            child: Container(
-              constraints: const BoxConstraints(maxHeight: 300),
-              child: CachedNetworkImage(
-                imageUrl: hole.imgs[0],
-                width: double.infinity,
-                fit: BoxFit.fitWidth,
-                placeholder: (context, url) => Container(
-                  height: 200,
-                  color: Colors.grey,
-                ),
-              ),
-            ),
-          );
   }
 
   @override

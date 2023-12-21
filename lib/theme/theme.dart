@@ -1,4 +1,5 @@
 import 'package:fluent_ui/fluent_ui.dart';
+import 'package:hfut_hole_flutter/gen/fonts.gen.dart';
 
 final lightTheme = FluentThemeData.light().copyWith(
     scaffoldBackgroundColor: Colors.white,
@@ -26,23 +27,37 @@ final lightTheme = FluentThemeData.light().copyWith(
 
 final darkTheme = FluentThemeData.dark();
 
-const fontTitle = TextStyle(
+const baseFont = TextStyle(fontFamily: FontFamily.sourceHanSans);
+
+final fontTitle = baseFont.copyWith(
   fontSize: 24,
   fontWeight: FontWeight.bold,
 );
-const fontSubTitle = TextStyle(
+final fontSubTitle = baseFont.copyWith(
   fontSize: 16,
   fontWeight: FontWeight.w100,
 );
-const fontSubTitleBold = TextStyle(
+final fontSubTitleBold = baseFont.copyWith(
   fontSize: 16,
   fontWeight: FontWeight.w500,
 );
-const fontBody = TextStyle(
+final fontBody = baseFont.copyWith(
   fontSize: 16,
   fontWeight: FontWeight.normal,
 );
-const fontFoot = TextStyle(
+final fontBodyBold = baseFont.copyWith(
+  fontSize: 16,
+  fontWeight: FontWeight.bold,
+);
+final fontSmallerBody = baseFont.copyWith(
+  fontSize: 12,
+  fontWeight: FontWeight.normal,
+);
+final fontSmallerBodyBold = baseFont.copyWith(
+  fontSize: 12,
+  fontWeight: FontWeight.bold,
+);
+final fontFoot = baseFont.copyWith(
   fontSize: 10,
   fontWeight: FontWeight.normal,
 );

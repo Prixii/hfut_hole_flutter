@@ -6,7 +6,12 @@ import 'package:hfut_hole_flutter/components/common/title_bar.dart';
 import 'package:hfut_hole_flutter/gen/assets.gen.dart';
 import 'package:hfut_hole_flutter/model/enums.dart';
 import 'package:hfut_hole_flutter/page/hole_detail/index.dart';
+import 'package:hfut_hole_flutter/page/message/index.dart';
+import 'package:hfut_hole_flutter/page/setting/index.dart';
+import 'package:hfut_hole_flutter/page/space/index.dart';
+import 'package:hfut_hole_flutter/page/user/index.dart';
 import 'package:hfut_hole_flutter/riverpod/global/page_state_provider.dart';
+import 'package:hfut_hole_flutter/theme/theme.dart';
 import 'package:hfut_hole_flutter/util/widget_util.dart';
 import 'package:unicons/unicons.dart';
 
@@ -39,74 +44,92 @@ class Home extends StatelessWidget {
     );
   }
 
-  Widget _buildLeftNavigator() {
-    const iconSize = 32.0;
-
+  Widget _buildLeftPart() {
     return SizedBox(
       width: 80,
       child: Padding(
         padding: const EdgeInsets.only(left: 16),
-        child: Container(
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(16),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.2),
-                spreadRadius: 0,
-                blurRadius: 2,
-                offset: const Offset(0, 1),
-              ),
-            ],
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              _buildAvatar(),
-              const Divider(),
-              NavigatorItem(
-                  targetPage: Pages.home,
-                  child: Icon(
-                    UniconsLine.estate,
-                    color: Colors.grey[80],
-                    size: iconSize,
-                  )),
-              NavigatorItem(
-                  targetPage: Pages.space,
-                  child: Icon(
-                    UniconsLine.golf_ball,
-                    color: Colors.grey[80],
-                    size: iconSize,
-                  )),
-              NavigatorItem(
-                  targetPage: Pages.message,
-                  child: Icon(
-                    color: Colors.grey[80],
-                    UniconsLine.comment_alt_exclamation,
-                    size: iconSize,
-                  )),
-              const Divider(),
-              _buildCreateHoleButton(iconSize),
-            ],
-          ),
+        child: Column(
+          children: [
+            Expanded(child: Container()),
+            _buildLeftNavigator(),
+            const SizedBox(height: 20),
+            _buildCreateHoleButton(),
+            Expanded(child: Container()),
+          ],
         ),
       ),
     );
   }
 
-  Widget _buildCreateHoleButton(double iconSize) {
+  Widget _buildLeftNavigator() {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.2),
+            spreadRadius: 0,
+            blurRadius: 2,
+            offset: const Offset(0, 1),
+          ),
+        ],
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          _buildAvatar(),
+          const Divider(),
+          NavigatorItem(
+              targetPage: Pages.home,
+              child: Icon(
+                UniconsLine.estate,
+                color: Colors.grey[80],
+                size: 32.0,
+              )),
+          NavigatorItem(
+              targetPage: Pages.space,
+              child: Icon(
+                UniconsLine.golf_ball,
+                color: Colors.grey[80],
+                size: 32.0,
+              )),
+          NavigatorItem(
+              targetPage: Pages.message,
+              child: Icon(
+                color: Colors.grey[80],
+                UniconsLine.comment_alt_exclamation,
+                size: 32.0,
+              )),
+          const Divider(),
+          NavigatorItem(
+              targetPage: Pages.setting,
+              child: Icon(
+                color: Colors.grey[80],
+                UniconsLine.setting,
+                size: 32.0,
+              )),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildCreateHoleButton() {
     return Padding(
       padding: const EdgeInsets.fromLTRB(8, 4, 8, 4),
       child: Hoverable(
+        activeColor: primaryColorDarker,
+        inactiveColor: primaryColor,
         borderRadius: 16,
         onTap: () => {},
-        child: SizedBox(
+        child: const SizedBox(
           height: 48,
           child: Center(
             child: Icon(
-              UniconsLine.plus_circle,
-              size: iconSize,
-              color: Colors.grey[80],
+              UniconsLine.pen,
+              size: 32.0,
+              color: Colors.white,
             ),
           ),
         ),
@@ -118,7 +141,7 @@ class Home extends StatelessWidget {
     return Column(
       children: [
         _buildSearchBar(),
-        Expanded(
+        const Expanded(
           child: HoleMasonryLayout(),
         ),
       ],
@@ -169,42 +192,62 @@ class Home extends StatelessWidget {
     return Consumer(
         builder: (BuildContext context, WidgetRef ref, Widget? child) {
       return AnimatedSwitcher(
-        duration: const Duration(milliseconds: 200),
-        switchInCurve: Curves.bounceInOut,
-        switchOutCurve: Curves.bounceInOut,
-        transitionBuilder: (child, animation) => SlideTransition(
-          position: animation.drive(
-              Tween<Offset>(begin: const Offset(1, 0), end: Offset.zero)),
-          child: child,
-        ),
-        child: ref.watch(pageStateProvider).appState.showHole
-            ? const HoleDetailPage()
-            : _buildRightPart(),
-      );
+          duration: const Duration(milliseconds: 200),
+          switchInCurve: Curves.bounceInOut,
+          switchOutCurve: Curves.bounceInOut,
+          transitionBuilder: (child, animation) => SlideTransition(
+                position: animation.drive(
+                    Tween<Offset>(begin: const Offset(0, 1), end: Offset.zero)),
+                child: child,
+              ),
+          child: switch (ref.watch(pageStateProvider).appState.page) {
+            Pages.user => const UserPage(),
+            Pages.home => _buildHolePage(ref),
+            Pages.space => const SpacePage(),
+            Pages.message => const MessagePage(),
+            Pages.setting => const SettingPage(),
+          });
     });
+  }
+
+  Widget _buildHolePage(WidgetRef ref) {
+    return AnimatedSwitcher(
+      duration: const Duration(milliseconds: 200),
+      switchInCurve: Curves.bounceInOut,
+      switchOutCurve: Curves.bounceInOut,
+      transitionBuilder: (child, animation) => SlideTransition(
+        position: animation
+            .drive(Tween<Offset>(begin: const Offset(1, 0), end: Offset.zero)),
+        child: child,
+      ),
+      child: ref.watch(pageStateProvider).appState.showHole
+          ? const HoleDetailPage()
+          : _buildRightPart(),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return ScaffoldPage(
-        padding: EdgeInsets.zero,
-        content: Center(
-          child: Column(
-            children: [
-              const TitleBar(),
-              Expanded(
-                child: Row(
-                  children: [
-                    _buildLeftNavigator(),
-                    const SizedBox(width: 10),
-                    Expanded(
-                      child: _buildContent(),
-                    ),
-                  ],
-                ),
+      padding: EdgeInsets.zero,
+      content: Center(
+        child: Column(
+          children: [
+            const TitleBar(),
+            Expanded(
+              child: Row(
+                children: [
+                  _buildLeftPart(),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: _buildContent(),
+                  ),
+                ],
               ),
-            ],
-          ),
-        ));
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

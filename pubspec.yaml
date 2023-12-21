@@ -49,4 +49,11 @@ flutter:
   assets:
     - assets/images/
     - assets/emoji/
+  fonts:
+    - family: SourceHanSans
+      fonts:
+        - asset: assets/fonts/SourceHanSansSC-Medium.otf
+        - asset: assets/fonts/SourceHanSansSC-Normal.otf
+        - asset: assets/fonts/SourceHanSansSC-Regular.otf
+
     

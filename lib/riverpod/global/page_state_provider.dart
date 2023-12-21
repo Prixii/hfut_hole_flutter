@@ -1,5 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:hfut_hole_flutter/main.dart';
 import 'package:hfut_hole_flutter/model/enums.dart';
 import 'package:hfut_hole_flutter/model/hole/hole.dart';
 import 'package:hfut_hole_flutter/network/hole.dart';
@@ -48,7 +47,6 @@ class PageState extends _$PageState {
         page: page ?? state.appState.holeListPage,
         limit: limit ?? state.appState.holeListLimit);
     if (response.statusCode == 200) {
-      logger.i(response.data);
       if (response.data["data"]["items"] != null) {
         state = state.copyWith(
             appState: state.appState.copyWith(

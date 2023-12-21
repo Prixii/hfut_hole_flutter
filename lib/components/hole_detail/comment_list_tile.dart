@@ -1,6 +1,7 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:hfut_hole_flutter/components/common/user_avatar.dart';
 import 'package:hfut_hole_flutter/model/hole/hole.dart';
+import 'package:hfut_hole_flutter/theme/theme.dart';
 import 'package:unicons/unicons.dart';
 
 class CommentListTile extends StatefulWidget {
@@ -60,7 +61,10 @@ class _CommentListTileState extends State<CommentListTile> {
   }
 
   Widget _buildReplyButton() {
-    return const Text("回复");
+    return Text(
+      "回复",
+      style: fontSmallerBodyBold,
+    );
   }
 
   Widget _buildFavoriteIcon() {

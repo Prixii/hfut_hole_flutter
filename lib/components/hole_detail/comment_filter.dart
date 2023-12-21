@@ -1,4 +1,5 @@
 import 'package:fluent_ui/fluent_ui.dart';
+import 'package:hfut_hole_flutter/theme/theme.dart';
 
 class CommentFilter extends StatefulWidget {
   const CommentFilter({super.key});
@@ -14,18 +15,28 @@ class _CommentFilterState extends State<CommentFilter> {
       height: 40,
       child: Row(
         children: [
+          Text(
+            "评论",
+            style: fontTitle,
+          ),
           Expanded(
             child: Container(),
           ),
-          Container(
-            width: 100,
-            color: Colors.green,
-          ),
           Expanded(
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                SizedBox(width: 10),
-                Container(width: 60, color: Colors.green),
+                Text(
+                  "只看楼主",
+                  style: fontSmallerBody.copyWith(color: Colors.grey[80]),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(width: 10),
+                Text(
+                  "按热度",
+                  style: fontSmallerBody.copyWith(color: Colors.grey[80]),
+                  textAlign: TextAlign.center,
+                ),
               ],
             ),
           ),

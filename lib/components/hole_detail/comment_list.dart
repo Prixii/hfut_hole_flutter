@@ -37,9 +37,10 @@ class _CommentListState extends ConsumerState<CommentList> {
             const CommentFilter(),
             Expanded(
               child: ListView.builder(
-                  itemBuilder: (context, index) =>
-                      CommentListTile(comment: comments[index]),
-                  itemCount: comments.length),
+                itemBuilder: (context, index) =>
+                    CommentListTile(comment: comments[index]),
+                itemCount: comments.length,
+              ),
             ),
             const CommentBox(),
           ],
