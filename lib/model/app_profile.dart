@@ -6,6 +6,11 @@ class AppProfile {
     _prefs = await SharedPreferences.getInstance();
   }
 
+  static logout() {
+    token = '';
+    password = '';
+  }
+
   static String get studentId => _prefs!.getString('studentId') ?? '';
   static String get password => _prefs!.getString('password') ?? '';
   static String get token => _prefs!.getString('token') ?? '';

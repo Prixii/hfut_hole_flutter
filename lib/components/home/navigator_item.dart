@@ -21,50 +21,48 @@ class NavigatorItem extends ConsumerWidget {
 
     return SizedBox(
       height: 56,
-      child: GestureDetector(
-        onTap: () => ref.read(pageStateProvider.notifier).setPage(targetPage),
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(8, 4, 8, 4),
-          child: Hoverable(
-            onTap: () => {},
-            borderRadius: 16,
-            child: Column(
-              children: [
-                Container(
-                  height: 6,
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(8, 4, 8, 4),
+        child: Hoverable(
+          onTap: () =>
+              {ref.read(pageStateProvider.notifier).setPage(targetPage)},
+          borderRadius: 16,
+          child: Column(
+            children: [
+              Container(
+                height: 6,
+              ),
+              Expanded(
+                child: TweenAnimationBuilder(
+                  duration: const Duration(milliseconds: 300),
+                  curve: Curves.bounceInOut,
+                  tween: Tween<double>(
+                      begin: isActive ? 0 : 1, end: isActive ? 1 : 0),
+                  builder: (_, value, __) => ShaderMask(
+                      shaderCallback: (Rect bounds) {
+                        return RadialGradient(
+                          center: Alignment.center,
+                          radius: 1,
+                          colors: const [primaryColor, Colors.transparent],
+                          stops: [value, value],
+                        ).createShader(bounds);
+                      },
+                      blendMode: BlendMode.srcATop,
+                      child: child),
                 ),
-                Expanded(
-                  child: TweenAnimationBuilder(
-                    duration: const Duration(milliseconds: 300),
-                    curve: Curves.bounceInOut,
-                    tween: Tween<double>(
-                        begin: isActive ? 0 : 1, end: isActive ? 1 : 0),
-                    builder: (_, value, __) => ShaderMask(
-                        shaderCallback: (Rect bounds) {
-                          return RadialGradient(
-                            center: Alignment.center,
-                            radius: 1,
-                            colors: const [primaryColor, Colors.transparent],
-                            stops: [value, value],
-                          ).createShader(bounds);
-                        },
-                        blendMode: BlendMode.srcATop,
-                        child: child),
-                  ),
+              ),
+              Container(
+                height: 3,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(2),
+                  color: isActive ? primaryColor : Colors.transparent,
                 ),
-                Container(
-                  height: 3,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(2),
-                    color: isActive ? primaryColor : Colors.transparent,
-                  ),
-                  width: 36,
-                ),
-                Container(
-                  height: 6,
-                ),
-              ],
-            ),
+                width: 36,
+              ),
+              Container(
+                height: 6,
+              ),
+            ],
           ),
         ),
       ),
