@@ -16,8 +16,13 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$PageStateData {
+  bool get isFetchingHole => throw _privateConstructorUsedError;
   HoleStateData get holeState => throw _privateConstructorUsedError;
-  AppStateData get appState => throw _privateConstructorUsedError;
+  Pages get page => throw _privateConstructorUsedError;
+  bool get showHole => throw _privateConstructorUsedError;
+  List<Hole> get holeList => throw _privateConstructorUsedError;
+  int get holeListPage => throw _privateConstructorUsedError;
+  int get holeListLimit => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PageStateDataCopyWith<PageStateData> get copyWith =>
@@ -30,10 +35,16 @@ abstract class $PageStateDataCopyWith<$Res> {
           PageStateData value, $Res Function(PageStateData) then) =
       _$PageStateDataCopyWithImpl<$Res, PageStateData>;
   @useResult
-  $Res call({HoleStateData holeState, AppStateData appState});
+  $Res call(
+      {bool isFetchingHole,
+      HoleStateData holeState,
+      Pages page,
+      bool showHole,
+      List<Hole> holeList,
+      int holeListPage,
+      int holeListLimit});
 
   $HoleStateDataCopyWith<$Res> get holeState;
-  $AppStateDataCopyWith<$Res> get appState;
 }
 
 /// @nodoc
@@ -49,18 +60,43 @@ class _$PageStateDataCopyWithImpl<$Res, $Val extends PageStateData>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? isFetchingHole = null,
     Object? holeState = null,
-    Object? appState = null,
+    Object? page = null,
+    Object? showHole = null,
+    Object? holeList = null,
+    Object? holeListPage = null,
+    Object? holeListLimit = null,
   }) {
     return _then(_value.copyWith(
+      isFetchingHole: null == isFetchingHole
+          ? _value.isFetchingHole
+          : isFetchingHole // ignore: cast_nullable_to_non_nullable
+              as bool,
       holeState: null == holeState
           ? _value.holeState
           : holeState // ignore: cast_nullable_to_non_nullable
               as HoleStateData,
-      appState: null == appState
-          ? _value.appState
-          : appState // ignore: cast_nullable_to_non_nullable
-              as AppStateData,
+      page: null == page
+          ? _value.page
+          : page // ignore: cast_nullable_to_non_nullable
+              as Pages,
+      showHole: null == showHole
+          ? _value.showHole
+          : showHole // ignore: cast_nullable_to_non_nullable
+              as bool,
+      holeList: null == holeList
+          ? _value.holeList
+          : holeList // ignore: cast_nullable_to_non_nullable
+              as List<Hole>,
+      holeListPage: null == holeListPage
+          ? _value.holeListPage
+          : holeListPage // ignore: cast_nullable_to_non_nullable
+              as int,
+      holeListLimit: null == holeListLimit
+          ? _value.holeListLimit
+          : holeListLimit // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 
@@ -69,14 +105,6 @@ class _$PageStateDataCopyWithImpl<$Res, $Val extends PageStateData>
   $HoleStateDataCopyWith<$Res> get holeState {
     return $HoleStateDataCopyWith<$Res>(_value.holeState, (value) {
       return _then(_value.copyWith(holeState: value) as $Val);
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $AppStateDataCopyWith<$Res> get appState {
-    return $AppStateDataCopyWith<$Res>(_value.appState, (value) {
-      return _then(_value.copyWith(appState: value) as $Val);
     });
   }
 }
@@ -89,12 +117,17 @@ abstract class _$$PageStateDataImplCopyWith<$Res>
       __$$PageStateDataImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({HoleStateData holeState, AppStateData appState});
+  $Res call(
+      {bool isFetchingHole,
+      HoleStateData holeState,
+      Pages page,
+      bool showHole,
+      List<Hole> holeList,
+      int holeListPage,
+      int holeListLimit});
 
   @override
   $HoleStateDataCopyWith<$Res> get holeState;
-  @override
-  $AppStateDataCopyWith<$Res> get appState;
 }
 
 /// @nodoc
@@ -108,18 +141,43 @@ class __$$PageStateDataImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? isFetchingHole = null,
     Object? holeState = null,
-    Object? appState = null,
+    Object? page = null,
+    Object? showHole = null,
+    Object? holeList = null,
+    Object? holeListPage = null,
+    Object? holeListLimit = null,
   }) {
     return _then(_$PageStateDataImpl(
+      isFetchingHole: null == isFetchingHole
+          ? _value.isFetchingHole
+          : isFetchingHole // ignore: cast_nullable_to_non_nullable
+              as bool,
       holeState: null == holeState
           ? _value.holeState
           : holeState // ignore: cast_nullable_to_non_nullable
               as HoleStateData,
-      appState: null == appState
-          ? _value.appState
-          : appState // ignore: cast_nullable_to_non_nullable
-              as AppStateData,
+      page: null == page
+          ? _value.page
+          : page // ignore: cast_nullable_to_non_nullable
+              as Pages,
+      showHole: null == showHole
+          ? _value.showHole
+          : showHole // ignore: cast_nullable_to_non_nullable
+              as bool,
+      holeList: null == holeList
+          ? _value._holeList
+          : holeList // ignore: cast_nullable_to_non_nullable
+              as List<Hole>,
+      holeListPage: null == holeListPage
+          ? _value.holeListPage
+          : holeListPage // ignore: cast_nullable_to_non_nullable
+              as int,
+      holeListLimit: null == holeListLimit
+          ? _value.holeListLimit
+          : holeListLimit // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -127,16 +185,40 @@ class __$$PageStateDataImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$PageStateDataImpl implements _PageStateData {
-  const _$PageStateDataImpl({required this.holeState, required this.appState});
+  const _$PageStateDataImpl(
+      {required this.isFetchingHole,
+      required this.holeState,
+      required this.page,
+      required this.showHole,
+      required final List<Hole> holeList,
+      required this.holeListPage,
+      required this.holeListLimit})
+      : _holeList = holeList;
 
+  @override
+  final bool isFetchingHole;
   @override
   final HoleStateData holeState;
   @override
-  final AppStateData appState;
+  final Pages page;
+  @override
+  final bool showHole;
+  final List<Hole> _holeList;
+  @override
+  List<Hole> get holeList {
+    if (_holeList is EqualUnmodifiableListView) return _holeList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_holeList);
+  }
+
+  @override
+  final int holeListPage;
+  @override
+  final int holeListLimit;
 
   @override
   String toString() {
-    return 'PageStateData(holeState: $holeState, appState: $appState)';
+    return 'PageStateData(isFetchingHole: $isFetchingHole, holeState: $holeState, page: $page, showHole: $showHole, holeList: $holeList, holeListPage: $holeListPage, holeListLimit: $holeListLimit)';
   }
 
   @override
@@ -144,14 +226,30 @@ class _$PageStateDataImpl implements _PageStateData {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$PageStateDataImpl &&
+            (identical(other.isFetchingHole, isFetchingHole) ||
+                other.isFetchingHole == isFetchingHole) &&
             (identical(other.holeState, holeState) ||
                 other.holeState == holeState) &&
-            (identical(other.appState, appState) ||
-                other.appState == appState));
+            (identical(other.page, page) || other.page == page) &&
+            (identical(other.showHole, showHole) ||
+                other.showHole == showHole) &&
+            const DeepCollectionEquality().equals(other._holeList, _holeList) &&
+            (identical(other.holeListPage, holeListPage) ||
+                other.holeListPage == holeListPage) &&
+            (identical(other.holeListLimit, holeListLimit) ||
+                other.holeListLimit == holeListLimit));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, holeState, appState);
+  int get hashCode => Object.hash(
+      runtimeType,
+      isFetchingHole,
+      holeState,
+      page,
+      showHole,
+      const DeepCollectionEquality().hash(_holeList),
+      holeListPage,
+      holeListLimit);
 
   @JsonKey(ignore: true)
   @override
@@ -162,13 +260,28 @@ class _$PageStateDataImpl implements _PageStateData {
 
 abstract class _PageStateData implements PageStateData {
   const factory _PageStateData(
-      {required final HoleStateData holeState,
-      required final AppStateData appState}) = _$PageStateDataImpl;
+      {required final bool isFetchingHole,
+      required final HoleStateData holeState,
+      required final Pages page,
+      required final bool showHole,
+      required final List<Hole> holeList,
+      required final int holeListPage,
+      required final int holeListLimit}) = _$PageStateDataImpl;
 
+  @override
+  bool get isFetchingHole;
   @override
   HoleStateData get holeState;
   @override
-  AppStateData get appState;
+  Pages get page;
+  @override
+  bool get showHole;
+  @override
+  List<Hole> get holeList;
+  @override
+  int get holeListPage;
+  @override
+  int get holeListLimit;
   @override
   @JsonKey(ignore: true)
   _$$PageStateDataImplCopyWith<_$PageStateDataImpl> get copyWith =>
@@ -461,222 +574,5 @@ abstract class _HoleStateData implements HoleStateData {
   @override
   @JsonKey(ignore: true)
   _$$HoleStateDataImplCopyWith<_$HoleStateDataImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-mixin _$AppStateData {
-  Pages get page => throw _privateConstructorUsedError;
-  bool get showHole => throw _privateConstructorUsedError;
-  List<Hole> get holeList => throw _privateConstructorUsedError;
-  int get holeListPage => throw _privateConstructorUsedError;
-  int get holeListLimit => throw _privateConstructorUsedError;
-
-  @JsonKey(ignore: true)
-  $AppStateDataCopyWith<AppStateData> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $AppStateDataCopyWith<$Res> {
-  factory $AppStateDataCopyWith(
-          AppStateData value, $Res Function(AppStateData) then) =
-      _$AppStateDataCopyWithImpl<$Res, AppStateData>;
-  @useResult
-  $Res call(
-      {Pages page,
-      bool showHole,
-      List<Hole> holeList,
-      int holeListPage,
-      int holeListLimit});
-}
-
-/// @nodoc
-class _$AppStateDataCopyWithImpl<$Res, $Val extends AppStateData>
-    implements $AppStateDataCopyWith<$Res> {
-  _$AppStateDataCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? page = null,
-    Object? showHole = null,
-    Object? holeList = null,
-    Object? holeListPage = null,
-    Object? holeListLimit = null,
-  }) {
-    return _then(_value.copyWith(
-      page: null == page
-          ? _value.page
-          : page // ignore: cast_nullable_to_non_nullable
-              as Pages,
-      showHole: null == showHole
-          ? _value.showHole
-          : showHole // ignore: cast_nullable_to_non_nullable
-              as bool,
-      holeList: null == holeList
-          ? _value.holeList
-          : holeList // ignore: cast_nullable_to_non_nullable
-              as List<Hole>,
-      holeListPage: null == holeListPage
-          ? _value.holeListPage
-          : holeListPage // ignore: cast_nullable_to_non_nullable
-              as int,
-      holeListLimit: null == holeListLimit
-          ? _value.holeListLimit
-          : holeListLimit // ignore: cast_nullable_to_non_nullable
-              as int,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$AppStateDataImplCopyWith<$Res>
-    implements $AppStateDataCopyWith<$Res> {
-  factory _$$AppStateDataImplCopyWith(
-          _$AppStateDataImpl value, $Res Function(_$AppStateDataImpl) then) =
-      __$$AppStateDataImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {Pages page,
-      bool showHole,
-      List<Hole> holeList,
-      int holeListPage,
-      int holeListLimit});
-}
-
-/// @nodoc
-class __$$AppStateDataImplCopyWithImpl<$Res>
-    extends _$AppStateDataCopyWithImpl<$Res, _$AppStateDataImpl>
-    implements _$$AppStateDataImplCopyWith<$Res> {
-  __$$AppStateDataImplCopyWithImpl(
-      _$AppStateDataImpl _value, $Res Function(_$AppStateDataImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? page = null,
-    Object? showHole = null,
-    Object? holeList = null,
-    Object? holeListPage = null,
-    Object? holeListLimit = null,
-  }) {
-    return _then(_$AppStateDataImpl(
-      page: null == page
-          ? _value.page
-          : page // ignore: cast_nullable_to_non_nullable
-              as Pages,
-      showHole: null == showHole
-          ? _value.showHole
-          : showHole // ignore: cast_nullable_to_non_nullable
-              as bool,
-      holeList: null == holeList
-          ? _value._holeList
-          : holeList // ignore: cast_nullable_to_non_nullable
-              as List<Hole>,
-      holeListPage: null == holeListPage
-          ? _value.holeListPage
-          : holeListPage // ignore: cast_nullable_to_non_nullable
-              as int,
-      holeListLimit: null == holeListLimit
-          ? _value.holeListLimit
-          : holeListLimit // ignore: cast_nullable_to_non_nullable
-              as int,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$AppStateDataImpl implements _AppStateData {
-  const _$AppStateDataImpl(
-      {required this.page,
-      required this.showHole,
-      required final List<Hole> holeList,
-      required this.holeListPage,
-      required this.holeListLimit})
-      : _holeList = holeList;
-
-  @override
-  final Pages page;
-  @override
-  final bool showHole;
-  final List<Hole> _holeList;
-  @override
-  List<Hole> get holeList {
-    if (_holeList is EqualUnmodifiableListView) return _holeList;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_holeList);
-  }
-
-  @override
-  final int holeListPage;
-  @override
-  final int holeListLimit;
-
-  @override
-  String toString() {
-    return 'AppStateData(page: $page, showHole: $showHole, holeList: $holeList, holeListPage: $holeListPage, holeListLimit: $holeListLimit)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$AppStateDataImpl &&
-            (identical(other.page, page) || other.page == page) &&
-            (identical(other.showHole, showHole) ||
-                other.showHole == showHole) &&
-            const DeepCollectionEquality().equals(other._holeList, _holeList) &&
-            (identical(other.holeListPage, holeListPage) ||
-                other.holeListPage == holeListPage) &&
-            (identical(other.holeListLimit, holeListLimit) ||
-                other.holeListLimit == holeListLimit));
-  }
-
-  @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      page,
-      showHole,
-      const DeepCollectionEquality().hash(_holeList),
-      holeListPage,
-      holeListLimit);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$AppStateDataImplCopyWith<_$AppStateDataImpl> get copyWith =>
-      __$$AppStateDataImplCopyWithImpl<_$AppStateDataImpl>(this, _$identity);
-}
-
-abstract class _AppStateData implements AppStateData {
-  const factory _AppStateData(
-      {required final Pages page,
-      required final bool showHole,
-      required final List<Hole> holeList,
-      required final int holeListPage,
-      required final int holeListLimit}) = _$AppStateDataImpl;
-
-  @override
-  Pages get page;
-  @override
-  bool get showHole;
-  @override
-  List<Hole> get holeList;
-  @override
-  int get holeListPage;
-  @override
-  int get holeListLimit;
-  @override
-  @JsonKey(ignore: true)
-  _$$AppStateDataImplCopyWith<_$AppStateDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

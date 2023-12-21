@@ -17,7 +17,7 @@ class NavigatorItem extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    bool isActive = ref.watch(pageStateProvider).appState.page == targetPage;
+    bool isActive = ref.watch(pageStateProvider).page == targetPage;
 
     return SizedBox(
       height: 56,

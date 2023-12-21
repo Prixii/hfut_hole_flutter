@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:hfut_hole_flutter/components/common/hole_card.dart';
 import 'package:hfut_hole_flutter/components/common/hoverable.dart';
-import 'package:hfut_hole_flutter/main.dart';
+import 'package:hfut_hole_flutter/model/hole/hole.dart';
 import 'package:hfut_hole_flutter/riverpod/global/page_state_provider.dart';
 import 'package:hfut_hole_flutter/theme/theme.dart';
 
@@ -14,22 +14,9 @@ class HoleMasonryLayout extends ConsumerStatefulWidget {
   ConsumerState<HoleMasonryLayout> createState() => _HoleMasonryLayoutState();
 }
 
-class _HoleMasonryLayoutState extends ConsumerState<HoleMasonryLayout>
-    with AutomaticKeepAliveClientMixin<HoleMasonryLayout> {
+class _HoleMasonryLayoutState extends ConsumerState<HoleMasonryLayout> {
   late ScrollController _scrollController;
-
-  @override
-  void initState() {
-    _scrollController = ScrollController();
-    _scrollController.addListener(() {
-      if (_scrollController.position.pixels ==
-          _scrollController.position.maxScrollExtent) {
-        logger.d('[fetch more]');
-        ref.read(pageStateProvider.notifier).fetchMoreHole(null, null);
-      }
-    });
-    super.initState();
-  }
+  late List<Hole> holeList;
 
   @override
   void dispose() {
@@ -38,13 +25,58 @@ class _HoleMasonryLayoutState extends ConsumerState<HoleMasonryLayout>
   }
 
   @override
-  Widget build(BuildContext context) {
-    super.build(context);
-    var holeList = ref.watch(pageStateProvider).appState.holeList;
+  void initState() {
+    _scrollController = ScrollController();
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels ==
+              _scrollController.position.maxScrollExtent &&
+          !_isFetchingHole()) {
+        ref.read(pageStateProvider.notifier).fetchMoreHole(null, null);
+      }
+    });
+    super.initState();
+  }
+
+  Widget _loadingSign() {
+    return _isFetchingHole()
+        ? Padding(
+            padding: const EdgeInsets.only(bottom: 8.0),
+            child: Container(
+              height: 42,
+              width: 128,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(28),
+              ),
+              child: Center(
+                  child: Row(
+                children: [
+                  const ProgressRing(),
+                  const SizedBox(width: 8),
+                  Text("很快啊很快",
+                      style: fontBody.copyWith(color: Colors.grey[100]))
+                ],
+              )),
+            ),
+          )
+        : const SizedBox(
+            height: 50,
+          );
+  }
+
+  bool _isFetchingHole() {
+    return ref.watch(pageStateProvider).isFetchingHole;
+  }
+
+  Future<void> initData() async {
     if (holeList.isEmpty) {
       ref.read(pageStateProvider.notifier).fetchMoreHole(null, 20);
     }
+  }
 
+  @override
+  Widget build(BuildContext context) {
+    holeList = ref.watch(pageStateProvider).holeList;
+    initData();
     return SingleChildScrollView(
       controller: _scrollController,
       child: Column(
@@ -62,38 +94,9 @@ class _HoleMasonryLayoutState extends ConsumerState<HoleMasonryLayout>
               ),
             ),
           ),
-          _buildLoadMoreButton(),
+          _loadingSign(),
         ],
       ),
     );
   }
-
-  Padding _buildLoadMoreButton() {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 16.0),
-      child: Hoverable(
-        inactiveColor: Colors.grey[50],
-        activeColor: Colors.grey,
-        borderRadius: 21,
-        onTap: () =>
-            {ref.read(pageStateProvider.notifier).fetchMoreHole(null, null)},
-        child: Container(
-          height: 42,
-          width: 128,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(28),
-          ),
-          child: Center(
-            child: Text(
-              '加载更多',
-              style: fontSubTitle.copyWith(color: Colors.white),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  @override
-  bool get wantKeepAlive => true;
 }

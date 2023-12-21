@@ -200,7 +200,7 @@ class Home extends StatelessWidget {
                     Tween<Offset>(begin: const Offset(0, 1), end: Offset.zero)),
                 child: child,
               ),
-          child: switch (ref.watch(pageStateProvider).appState.page) {
+          child: switch (ref.watch(pageStateProvider).page) {
             Pages.user => const UserPage(),
             Pages.home => _buildHolePage(ref),
             Pages.space => const SpacePage(),
@@ -220,7 +220,7 @@ class Home extends StatelessWidget {
             .drive(Tween<Offset>(begin: const Offset(1, 0), end: Offset.zero)),
         child: child,
       ),
-      child: ref.watch(pageStateProvider).appState.showHole
+      child: ref.watch(pageStateProvider).showHole
           ? const HoleDetailPage()
           : _buildRightPart(),
     );
