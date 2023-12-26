@@ -15,7 +15,7 @@ class HoleCard extends ConsumerWidget {
 
   Container _buildBaseCard(Widget child) {
     return Container(
-      constraints: const BoxConstraints(maxHeight: 500),
+      constraints: const BoxConstraints(maxHeight: 514),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(8.0),

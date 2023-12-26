@@ -5,6 +5,19 @@ class MessagePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(child: Text("Message"));
+    return Center(
+      child: Row(
+        children: [
+          Expanded(
+            flex: 1,
+            child: Container(color: Colors.grey),
+          ),
+          Expanded(
+            flex: 2,
+            child: Container(color: Colors.grey[50]),
+          ),
+        ],
+      ),
+    );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:hfut_hole_flutter/main.dart';
 import 'package:hfut_hole_flutter/model/enums.dart';
 import 'package:hfut_hole_flutter/model/hole/hole.dart';
 import 'package:hfut_hole_flutter/network/hole.dart';
@@ -46,6 +47,7 @@ class PageState extends _$PageState {
         page: page ?? state.holeListPage, limit: limit ?? state.holeListLimit);
     if (response.statusCode == 200) {
       if (response.data["data"]["items"] != null) {
+        logger.i(response.data["data"]["items"]);
         List<Hole> list = [];
         for (var item in response.data["data"]["items"]) {
           list.add(Hole.fromJson(item));

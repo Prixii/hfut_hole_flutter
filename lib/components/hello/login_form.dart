@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hfut_hole_flutter/components/hello/bottom_button.dart';
 import 'package:hfut_hole_flutter/main.dart';
 import 'package:hfut_hole_flutter/model/app_profile.dart';
+import 'package:hfut_hole_flutter/network/auth.dart';
 import 'package:hfut_hole_flutter/util/widget_util.dart';
 
 class LoginForm extends StatefulWidget {
@@ -69,22 +70,16 @@ class _LoginFormState extends State<LoginForm>
   }
 
   Future<void> _doLogin() {
-    return Future.delayed(const Duration(seconds: 2)).then((value) {
+    return authClient
+        .loginRequest(
+      studentId: int.parse(_studentIdController.text),
+      password: _passwordController.text,
+      rememberMe: _rememberMe,
+      autoLogin: _autoLogin,
+    )
+        .then((value) {
       context.go('/home');
     });
-
-    // authClient
-    //     .loginRequest(
-    //   studentId: int.parse(_studentIdController.text),
-    //   password: _passwordController.text,
-    //   rememberMe: rememberMe,
-    //   autoLogin: autoLogin,
-    // )
-    //     .then(
-    //   (value) {
-    //     logger.i(value);
-    //   },
-    // );
   }
 
   @override

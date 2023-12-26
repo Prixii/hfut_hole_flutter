@@ -10,11 +10,25 @@ final GoRouter router = GoRouter(
       path: "/",
       builder: (context, state) {
         // TODO 测试token有效性
-        if (AppProfile.autoLogin) {
+        if (AppProfile.autoLogin && AppProfile.token.isNotEmpty) {
           return const Home();
         } else {
           return const Hello();
         }
+      },
+    ),
+    GoRoute(
+      path: "/hello",
+      pageBuilder: (context, state) {
+        return CustomTransitionPage(
+          key: state.pageKey,
+          child: const Hello(),
+          transitionsBuilder: (_, animation, __, child) {
+            return FadeTransition(
+                opacity: CurveTween(curve: Curves.easeInOut).animate(animation),
+                child: child);
+          },
+        );
       },
     ),
     GoRoute(

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AppProfile {
@@ -9,6 +11,7 @@ class AppProfile {
   static logout() {
     token = '';
     password = '';
+    log("logout!");
   }
 
   static String get studentId => _prefs!.getString('studentId') ?? '';
